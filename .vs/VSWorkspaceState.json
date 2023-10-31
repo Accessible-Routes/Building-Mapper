@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\BuldingMapper"
   ],
-  "SelectedNode": "\\C:\\Users\\digioa\\Source\\Repos\\Building-Mapper",
+  "SelectedNode": "\\BuldingMapper\\RoomEditorForm.Designer.cs",
   "PreviewInSolutionExplorer": false
 }
