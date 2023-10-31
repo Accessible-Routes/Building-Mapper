@@ -14,7 +14,7 @@ namespace BuldingMapper
             RoomEditorForm newForm = new RoomEditorForm(rooms);
             RoomEditorResult result = newForm.ShowRoomEditor();
 
-            if(result.result == DialogResult.OK)
+            if (result.result == DialogResult.OK)
             {
                 rooms.AddRange(result.rooms);
             }
@@ -26,7 +26,7 @@ namespace BuldingMapper
         {
             roomListBox.Items.Clear();
 
-            foreach (Room room in rooms) 
+            foreach (Room room in rooms)
             {
                 roomListBox.Items.Add(room.Name);
             }

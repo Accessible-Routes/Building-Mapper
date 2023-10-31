@@ -28,9 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            tableLayoutPanel1 = new TableLayoutPanel();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            mainTableLayoutPanel = new TableLayoutPanel();
             panel1 = new Panel();
-            pictureBox1 = new PictureBox();
+            roomEditorTablePanel = new TableLayoutPanel();
+            roomEditor = new RoomEditorPanel();
+            toolGroupBox = new GroupBox();
+            flowLayoutPanel1 = new FlowLayoutPanel();
+            startZoomButton = new Button();
+            resetZoomButton = new Button();
             groupBox1 = new GroupBox();
             tableLayoutPanel2 = new TableLayoutPanel();
             roomListBox = new ListBox();
@@ -38,58 +44,123 @@
             button3 = new Button();
             button2 = new Button();
             button1 = new Button();
-            tableLayoutPanel1.SuspendLayout();
+            toolStripTableLayoutPanel = new TableLayoutPanel();
+            toolStrip1 = new ToolStrip();
+            toolStripDropDownButton1 = new ToolStripDropDownButton();
+            mainTableLayoutPanel.SuspendLayout();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            roomEditorTablePanel.SuspendLayout();
+            toolGroupBox.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
             groupBox1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             panel2.SuspendLayout();
+            toolStripTableLayoutPanel.SuspendLayout();
+            toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
-            // tableLayoutPanel1
+            // mainTableLayoutPanel
             // 
-            tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 65F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35F));
-            tableLayoutPanel1.Controls.Add(panel1, 0, 0);
-            tableLayoutPanel1.Controls.Add(groupBox1, 1, 0);
-            tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new Point(0, 0);
-            tableLayoutPanel1.Margin = new Padding(2);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 1;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(881, 398);
-            tableLayoutPanel1.TabIndex = 0;
+            mainTableLayoutPanel.ColumnCount = 2;
+            mainTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 65F));
+            mainTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35F));
+            mainTableLayoutPanel.Controls.Add(panel1, 0, 0);
+            mainTableLayoutPanel.Controls.Add(groupBox1, 1, 0);
+            mainTableLayoutPanel.Dock = DockStyle.Fill;
+            mainTableLayoutPanel.Location = new Point(3, 33);
+            mainTableLayoutPanel.Name = "mainTableLayoutPanel";
+            mainTableLayoutPanel.RowCount = 1;
+            mainTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            mainTableLayoutPanel.Size = new Size(1253, 627);
+            mainTableLayoutPanel.TabIndex = 0;
             // 
             // panel1
             // 
             panel1.AutoScroll = true;
-            panel1.Controls.Add(pictureBox1);
+            panel1.Controls.Add(roomEditorTablePanel);
             panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(2, 2);
-            panel1.Margin = new Padding(2);
+            panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
-            panel1.Size = new Size(568, 394);
+            panel1.Size = new Size(808, 621);
             panel1.TabIndex = 0;
             // 
-            // pictureBox1
+            // roomEditorTablePanel
             // 
-            pictureBox1.Image = Properties.Resources.Capture;
-            pictureBox1.Location = new Point(0, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(935, 589);
-            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            roomEditorTablePanel.ColumnCount = 1;
+            roomEditorTablePanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            roomEditorTablePanel.Controls.Add(roomEditor, 0, 0);
+            roomEditorTablePanel.Controls.Add(toolGroupBox, 0, 1);
+            roomEditorTablePanel.Dock = DockStyle.Fill;
+            roomEditorTablePanel.Location = new Point(0, 0);
+            roomEditorTablePanel.Name = "roomEditorTablePanel";
+            roomEditorTablePanel.RowCount = 2;
+            roomEditorTablePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 88F));
+            roomEditorTablePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 12F));
+            roomEditorTablePanel.Size = new Size(808, 621);
+            roomEditorTablePanel.TabIndex = 0;
+            // 
+            // roomEditor
+            // 
+            roomEditor.Dock = DockStyle.Fill;
+            roomEditor.Image = Properties.Resources.Capture;
+            roomEditor.Location = new Point(3, 3);
+            roomEditor.Name = "roomEditor";
+            roomEditor.Size = new Size(802, 540);
+            roomEditor.TabIndex = 0;
+            // 
+            // toolGroupBox
+            // 
+            toolGroupBox.Controls.Add(flowLayoutPanel1);
+            toolGroupBox.Dock = DockStyle.Fill;
+            toolGroupBox.Location = new Point(3, 549);
+            toolGroupBox.Name = "toolGroupBox";
+            toolGroupBox.Size = new Size(802, 69);
+            toolGroupBox.TabIndex = 1;
+            toolGroupBox.TabStop = false;
+            toolGroupBox.Text = "Tools";
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.Controls.Add(startZoomButton);
+            flowLayoutPanel1.Controls.Add(resetZoomButton);
+            flowLayoutPanel1.Dock = DockStyle.Fill;
+            flowLayoutPanel1.Location = new Point(3, 27);
+            flowLayoutPanel1.Margin = new Padding(0);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(796, 39);
+            flowLayoutPanel1.TabIndex = 0;
+            // 
+            // startZoomButton
+            // 
+            startZoomButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            startZoomButton.AutoSize = true;
+            startZoomButton.Location = new Point(3, 3);
+            startZoomButton.Name = "startZoomButton";
+            startZoomButton.Size = new Size(126, 35);
+            startZoomButton.TabIndex = 0;
+            startZoomButton.Text = "Start Zoom";
+            startZoomButton.UseVisualStyleBackColor = true;
+            // 
+            // resetZoomButton
+            // 
+            resetZoomButton.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            resetZoomButton.AutoSize = true;
+            resetZoomButton.Location = new Point(135, 3);
+            resetZoomButton.Name = "resetZoomButton";
+            resetZoomButton.Size = new Size(117, 35);
+            resetZoomButton.TabIndex = 1;
+            resetZoomButton.Text = "Reset Zoom";
+            resetZoomButton.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(tableLayoutPanel2);
             groupBox1.Dock = DockStyle.Fill;
-            groupBox1.Location = new Point(575, 3);
+            groupBox1.Location = new Point(818, 5);
+            groupBox1.Margin = new Padding(4, 5, 4, 5);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(303, 392);
+            groupBox1.Padding = new Padding(4, 5, 4, 5);
+            groupBox1.Size = new Size(431, 617);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "Rooms";
@@ -98,26 +169,28 @@
             // 
             tableLayoutPanel2.ColumnCount = 1;
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 29F));
             tableLayoutPanel2.Controls.Add(roomListBox, 0, 0);
             tableLayoutPanel2.Controls.Add(panel2, 0, 1);
             tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(3, 19);
+            tableLayoutPanel2.Location = new Point(4, 29);
+            tableLayoutPanel2.Margin = new Padding(4, 5, 4, 5);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 2;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 90F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
-            tableLayoutPanel2.Size = new Size(297, 370);
+            tableLayoutPanel2.Size = new Size(423, 583);
             tableLayoutPanel2.TabIndex = 1;
             // 
             // roomListBox
             // 
             roomListBox.Dock = DockStyle.Fill;
             roomListBox.FormattingEnabled = true;
-            roomListBox.ItemHeight = 15;
-            roomListBox.Location = new Point(3, 3);
+            roomListBox.ItemHeight = 25;
+            roomListBox.Location = new Point(4, 5);
+            roomListBox.Margin = new Padding(4, 5, 4, 5);
             roomListBox.Name = "roomListBox";
-            roomListBox.Size = new Size(291, 327);
+            roomListBox.Size = new Size(415, 514);
             roomListBox.TabIndex = 0;
             // 
             // panel2
@@ -126,17 +199,19 @@
             panel2.Controls.Add(button2);
             panel2.Controls.Add(button1);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(3, 336);
+            panel2.Location = new Point(4, 529);
+            panel2.Margin = new Padding(4, 5, 4, 5);
             panel2.Name = "panel2";
-            panel2.Size = new Size(291, 31);
+            panel2.Size = new Size(415, 49);
             panel2.TabIndex = 1;
             // 
             // button3
             // 
             button3.Dock = DockStyle.Fill;
-            button3.Location = new Point(75, 0);
+            button3.Location = new Point(107, 0);
+            button3.Margin = new Padding(4, 5, 4, 5);
             button3.Name = "button3";
-            button3.Size = new Size(141, 31);
+            button3.Size = new Size(201, 49);
             button3.TabIndex = 2;
             button3.Text = "Edit";
             button3.UseVisualStyleBackColor = true;
@@ -144,9 +219,10 @@
             // button2
             // 
             button2.Dock = DockStyle.Right;
-            button2.Location = new Point(216, 0);
+            button2.Location = new Point(308, 0);
+            button2.Margin = new Padding(4, 5, 4, 5);
             button2.Name = "button2";
-            button2.Size = new Size(75, 31);
+            button2.Size = new Size(107, 49);
             button2.TabIndex = 1;
             button2.Text = "Remove";
             button2.UseVisualStyleBackColor = true;
@@ -155,37 +231,78 @@
             // 
             button1.Dock = DockStyle.Left;
             button1.Location = new Point(0, 0);
+            button1.Margin = new Padding(4, 5, 4, 5);
             button1.Name = "button1";
-            button1.Size = new Size(75, 31);
+            button1.Size = new Size(107, 49);
             button1.TabIndex = 0;
             button1.Text = "Add";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // Form1
+            // toolStripTableLayoutPanel
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            toolStripTableLayoutPanel.ColumnCount = 1;
+            toolStripTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            toolStripTableLayoutPanel.Controls.Add(toolStrip1, 0, 0);
+            toolStripTableLayoutPanel.Controls.Add(mainTableLayoutPanel, 0, 1);
+            toolStripTableLayoutPanel.Dock = DockStyle.Fill;
+            toolStripTableLayoutPanel.Location = new Point(0, 0);
+            toolStripTableLayoutPanel.Margin = new Padding(0);
+            toolStripTableLayoutPanel.Name = "toolStripTableLayoutPanel";
+            toolStripTableLayoutPanel.RowCount = 2;
+            toolStripTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+            toolStripTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            toolStripTableLayoutPanel.Size = new Size(1259, 663);
+            toolStripTableLayoutPanel.TabIndex = 2;
+            // 
+            // toolStrip1
+            // 
+            toolStrip1.ImageScalingSize = new Size(24, 24);
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1 });
+            toolStrip1.Location = new Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Padding = new Padding(0);
+            toolStrip1.Size = new Size(1259, 30);
+            toolStrip1.TabIndex = 0;
+            toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripDropDownButton1
+            // 
+            toolStripDropDownButton1.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripDropDownButton1.Image = (Image)resources.GetObject("toolStripDropDownButton1.Image");
+            toolStripDropDownButton1.ImageTransparentColor = Color.Magenta;
+            toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            toolStripDropDownButton1.Size = new Size(56, 25);
+            toolStripDropDownButton1.Text = "File";
+            // 
+            // MainForm
+            // 
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(881, 398);
-            Controls.Add(tableLayoutPanel1);
-            Margin = new Padding(2);
-            Name = "Form1";
-            Text = "Form1";
-            tableLayoutPanel1.ResumeLayout(false);
+            ClientSize = new Size(1259, 663);
+            Controls.Add(toolStripTableLayoutPanel);
+            Name = "MainForm";
+            Text = "Room Editor";
+            mainTableLayoutPanel.ResumeLayout(false);
             panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            roomEditorTablePanel.ResumeLayout(false);
+            toolGroupBox.ResumeLayout(false);
+            flowLayoutPanel1.ResumeLayout(false);
+            flowLayoutPanel1.PerformLayout();
             groupBox1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             panel2.ResumeLayout(false);
+            toolStripTableLayoutPanel.ResumeLayout(false);
+            toolStripTableLayoutPanel.PerformLayout();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel mainTableLayoutPanel;
         private Panel panel1;
-        private PictureBox pictureBox1;
         private GroupBox groupBox1;
         private ListBox roomListBox;
         private TableLayoutPanel tableLayoutPanel2;
@@ -193,5 +310,14 @@
         private Button button3;
         private Button button2;
         private Button button1;
+        private TableLayoutPanel roomEditorTablePanel;
+        private RoomEditorPanel roomEditor;
+        private GroupBox toolGroupBox;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private Button startZoomButton;
+        private Button resetZoomButton;
+        private TableLayoutPanel toolStripTableLayoutPanel;
+        private ToolStrip toolStrip1;
+        private ToolStripDropDownButton toolStripDropDownButton1;
     }
 }

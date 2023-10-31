@@ -174,6 +174,23 @@ namespace BuldingMapper
             {
                 connectionsCheckedListBox.Items.Add(name);
             }
+
+            string s = (string)connectionsCheckedListBox.SelectedItem;
+        }
+
+        private bool isInList(string roomName)
+        {
+            foreach (Room r in newRooms)
+            {
+                if (r.Name == roomName) return true;
+            }
+
+            return false;
+        }
+
+        private void editButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
