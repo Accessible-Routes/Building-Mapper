@@ -1,0 +1,1 @@
+Place the PDFConverter script into a directory with pdf files and run it. It will create a new folder called PdfImages and place all converted files into there.
