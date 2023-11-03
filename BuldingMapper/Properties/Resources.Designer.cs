@@ -63,9 +63,9 @@ namespace BuldingMapper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Capture {
+        internal static System.Drawing.Bitmap Darrin_10 {
             get {
-                object obj = ResourceManager.GetObject("Capture", resourceCulture);
+                object obj = ResourceManager.GetObject("Darrin_10", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

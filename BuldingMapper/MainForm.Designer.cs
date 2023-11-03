@@ -102,7 +102,7 @@
             // roomEditor
             // 
             roomEditor.Dock = DockStyle.Fill;
-            roomEditor.Image = Properties.Resources.Capture;
+            roomEditor.Image = Properties.Resources.Darrin_10;
             roomEditor.Location = new Point(3, 3);
             roomEditor.Name = "roomEditor";
             roomEditor.Size = new Size(802, 540);
