@@ -31,5 +31,20 @@ namespace BuldingMapper
                 roomListBox.Items.Add(room.Name);
             }
         }
+
+        private void saveBuildingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void saveFloorAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
