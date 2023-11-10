@@ -1,34 +1,57 @@
-namespace BuldingMapper
+namespace BuildingMapper
 {
     public partial class MainForm : Form
     {
-        List<Room> rooms = new List<Room>();
+        string? buildingName = null;
+        List<FloorEditor> floors = new List<FloorEditor>();
+
+
 
         public MainForm()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+
+
+        private void saveBuildingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RoomEditorForm newForm = new RoomEditorForm(rooms);
-            RoomEditorResult result = newForm.ShowRoomEditor();
 
-            if(result.result == DialogResult.OK)
-            {
-                rooms.AddRange(result.rooms);
-            }
-
-            UpdateRoomList();
         }
 
-        private void UpdateRoomList()
+        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            roomListBox.Items.Clear();
+            Close();
+        }
 
-            foreach (Room room in rooms) 
+        private void saveFloorAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void newBuildingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewBuildingForm newBuildingForm = new NewBuildingForm();
+            NewBuildingFormResult result = newBuildingForm.ShowNewBuilding();
+
+            if (result.result == DialogResult.OK)
             {
-                roomListBox.Items.Add(room.Name);
+                buildingName = result.buildingName;
+                this.Text = "Room Editor (" + buildingName + ")";
+                Image floorPlanImage = Image.FromFile(result.filepath);
+
+                TabPage tabPage = new TabPage(result.floorName);
+                floorTabControl.TabPages.Add(tabPage);
+
+                FloorEditor floorEditor = new FloorEditor();
+                floorEditor.Dock = DockStyle.Fill;
+
+                tabPage.Controls.Add(floorEditor);
+                floors.Add(floorEditor);
+
+                floorEditor.UpdateImage(floorPlanImage);
+
+                floorTabControl.TabPages.RemoveByKey("welcomeTab");
             }
         }
     }
