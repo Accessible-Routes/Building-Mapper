@@ -196,6 +196,7 @@
             roomNameLabel.Size = new Size(223, 42);
             roomNameLabel.TabIndex = 0;
             roomNameLabel.Text = "Room Name";
+            roomNameLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // roomTypeLabel
             // 
@@ -206,6 +207,7 @@
             roomTypeLabel.Size = new Size(223, 42);
             roomTypeLabel.TabIndex = 1;
             roomTypeLabel.Text = "Room Type";
+            roomTypeLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // roomNameTextBox
             // 

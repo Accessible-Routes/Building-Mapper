@@ -31,7 +31,8 @@ namespace BuildingMapper
 
         private void newBuildingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            NewBuildingForm newBuildingForm = new NewBuildingForm();
+            newBuildingForm.ShowDialog();
         }
     }
 }
