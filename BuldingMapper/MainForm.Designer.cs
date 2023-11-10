@@ -1,4 +1,4 @@
-﻿namespace BuldingMapper
+﻿namespace BuildingMapper
 {
     partial class MainForm
     {
@@ -45,15 +45,12 @@
             saveBuildingAsToolStripMenuItem = new ToolStripMenuItem();
             saveFloorAsToolStripMenuItem = new ToolStripMenuItem();
             quitToolStripMenuItem = new ToolStripMenuItem();
-            tabControl1 = new TabControl();
-            tabPage1 = new TabPage();
+            floorTabControl = new TabControl();
             tabPage2 = new TabPage();
-            floorEditor1 = new FloorEditor();
-            floorEditor2 = new FloorEditor();
+            label1 = new Label();
             toolStripTableLayoutPanel.SuspendLayout();
             toolStrip1.SuspendLayout();
-            tabControl1.SuspendLayout();
-            tabPage1.SuspendLayout();
+            floorTabControl.SuspendLayout();
             tabPage2.SuspendLayout();
             SuspendLayout();
             // 
@@ -62,7 +59,7 @@
             toolStripTableLayoutPanel.ColumnCount = 1;
             toolStripTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             toolStripTableLayoutPanel.Controls.Add(toolStrip1, 0, 0);
-            toolStripTableLayoutPanel.Controls.Add(tabControl1, 0, 1);
+            toolStripTableLayoutPanel.Controls.Add(floorTabControl, 0, 1);
             toolStripTableLayoutPanel.Dock = DockStyle.Fill;
             toolStripTableLayoutPanel.Location = new Point(0, 0);
             toolStripTableLayoutPanel.Margin = new Padding(0);
@@ -100,7 +97,7 @@
             newToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
             newToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { newBuildingToolStripMenuItem, newFloorFromImageToolStripMenuItem, newFloorFromExistingFloorPlanToolStripMenuItem });
             newToolStripMenuItem.Name = "newToolStripMenuItem";
-            newToolStripMenuItem.Size = new Size(158, 34);
+            newToolStripMenuItem.Size = new Size(270, 34);
             newToolStripMenuItem.Text = "New";
             // 
             // newBuildingToolStripMenuItem
@@ -109,6 +106,7 @@
             newBuildingToolStripMenuItem.Name = "newBuildingToolStripMenuItem";
             newBuildingToolStripMenuItem.Size = new Size(391, 34);
             newBuildingToolStripMenuItem.Text = "New Building";
+            newBuildingToolStripMenuItem.Click += newBuildingToolStripMenuItem_Click;
             // 
             // newFloorFromImageToolStripMenuItem
             // 
@@ -129,7 +127,7 @@
             openToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
             openToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openFloorToolStripMenuItem, openBuildingToolStripMenuItem });
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(158, 34);
+            openToolStripMenuItem.Size = new Size(270, 34);
             openToolStripMenuItem.Text = "Open";
             // 
             // openFloorToolStripMenuItem
@@ -151,7 +149,7 @@
             saveToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
             saveToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saveBuildingToolStripMenuItem, saveFloorToolStripMenuItem, saveBuildingAsToolStripMenuItem, saveFloorAsToolStripMenuItem });
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(158, 34);
+            saveToolStripMenuItem.Size = new Size(270, 34);
             saveToolStripMenuItem.Text = "Save";
             // 
             // saveBuildingToolStripMenuItem
@@ -188,58 +186,39 @@
             // 
             quitToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
             quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            quitToolStripMenuItem.Size = new Size(158, 34);
+            quitToolStripMenuItem.Size = new Size(270, 34);
             quitToolStripMenuItem.Text = "Quit";
             quitToolStripMenuItem.Click += quitToolStripMenuItem_Click;
             // 
-            // tabControl1
+            // floorTabControl
             // 
-            tabControl1.Controls.Add(tabPage1);
-            tabControl1.Controls.Add(tabPage2);
-            tabControl1.Dock = DockStyle.Fill;
-            tabControl1.Location = new Point(3, 33);
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1253, 627);
-            tabControl1.TabIndex = 1;
-            // 
-            // tabPage1
-            // 
-            tabPage1.Controls.Add(floorEditor1);
-            tabPage1.Location = new Point(4, 34);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1245, 589);
-            tabPage1.TabIndex = 0;
-            tabPage1.Text = "tabPage1";
-            tabPage1.UseVisualStyleBackColor = true;
+            floorTabControl.Controls.Add(tabPage2);
+            floorTabControl.Dock = DockStyle.Fill;
+            floorTabControl.Location = new Point(3, 33);
+            floorTabControl.Name = "floorTabControl";
+            floorTabControl.SelectedIndex = 0;
+            floorTabControl.Size = new Size(1253, 627);
+            floorTabControl.TabIndex = 1;
             // 
             // tabPage2
             // 
-            tabPage2.Controls.Add(floorEditor2);
+            tabPage2.Controls.Add(label1);
             tabPage2.Location = new Point(4, 34);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
             tabPage2.Size = new Size(1245, 589);
             tabPage2.TabIndex = 1;
-            tabPage2.Text = "tabPage2";
+            tabPage2.Text = "Welcome";
             tabPage2.UseVisualStyleBackColor = true;
             // 
-            // floorEditor1
+            // label1
             // 
-            floorEditor1.Dock = DockStyle.Fill;
-            floorEditor1.Location = new Point(3, 3);
-            floorEditor1.Name = "floorEditor1";
-            floorEditor1.Size = new Size(1239, 583);
-            floorEditor1.TabIndex = 0;
-            // 
-            // floorEditor2
-            // 
-            floorEditor2.Dock = DockStyle.Fill;
-            floorEditor2.Location = new Point(3, 3);
-            floorEditor2.Name = "floorEditor2";
-            floorEditor2.Size = new Size(1239, 583);
-            floorEditor2.TabIndex = 0;
+            label1.Dock = DockStyle.Fill;
+            label1.Location = new Point(0, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(1245, 589);
+            label1.TabIndex = 0;
+            label1.Text = "Create a new building or open an existing building file";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // MainForm
             // 
@@ -248,13 +227,12 @@
             ClientSize = new Size(1259, 663);
             Controls.Add(toolStripTableLayoutPanel);
             Name = "MainForm";
-            Text = "Room Editor";
+            Text = "Room Editor (No building)";
             toolStripTableLayoutPanel.ResumeLayout(false);
             toolStripTableLayoutPanel.PerformLayout();
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
-            tabControl1.ResumeLayout(false);
-            tabPage1.ResumeLayout(false);
+            floorTabControl.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -276,10 +254,8 @@
         private ToolStripMenuItem newBuildingToolStripMenuItem;
         private ToolStripMenuItem newFloorFromImageToolStripMenuItem;
         private ToolStripMenuItem newFloorFromExistingFloorPlanToolStripMenuItem;
-        private TabControl tabControl1;
-        private TabPage tabPage1;
-        private FloorEditor floorEditor1;
+        private TabControl floorTabControl;
         private TabPage tabPage2;
-        private FloorEditor floorEditor2;
+        private Label label1;
     }
 }

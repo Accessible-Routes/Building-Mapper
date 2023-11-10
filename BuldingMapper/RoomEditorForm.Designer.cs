@@ -1,4 +1,4 @@
-﻿namespace BuldingMapper
+﻿namespace BuildingMapper
 {
     partial class RoomEditorForm
     {

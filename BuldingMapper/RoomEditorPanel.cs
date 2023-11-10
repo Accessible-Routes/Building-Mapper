@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BuldingMapper
+namespace BuildingMapper
 {
     public class RoomEditorPanel : Panel
     {

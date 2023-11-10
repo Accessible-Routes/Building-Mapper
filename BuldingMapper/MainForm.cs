@@ -1,8 +1,11 @@
-namespace BuldingMapper
+namespace BuildingMapper
 {
     public partial class MainForm : Form
     {
-        List<Room> rooms = new List<Room>();
+        string? buildingName = null;
+        List<FloorEditor> floors = new List<FloorEditor>();
+
+
 
         public MainForm()
         {
@@ -22,6 +25,11 @@ namespace BuldingMapper
         }
 
         private void saveFloorAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void newBuildingToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
