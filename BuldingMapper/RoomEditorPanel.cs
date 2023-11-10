@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace BuldingMapper
     public class RoomEditorPanel : Panel
     {
         // The image to dispay, set in the Image property
-        private Image _image;
+        [AllowNull] private Image _image;
         // The current zoom factor
         private float _zoom = 1;
         // The zoom rectangle on the panel.
@@ -21,7 +22,7 @@ namespace BuldingMapper
         // Used in the mouse event handlers
         private bool _mouseDown;
         // The pen used to draw the zoom rectangle
-        private Pen _zoomPen;
+        [AllowNull] private Pen _zoomPen;
 
         /// <summary>
         /// Create a new <see cref="PictureZoomPanel"/>
@@ -34,8 +35,14 @@ namespace BuldingMapper
             ResizeRedraw = true;
             // Set default zoom pen
             ZoomPen = null;
+
+            ZoomToFit();
         }
 
+        public void Initialize()
+        {
+            ZoomToFit();
+        }
         /// <summary>
         /// The image to be displayed
         /// </summary>
@@ -47,6 +54,7 @@ namespace BuldingMapper
             set
             {
                 _image = value;
+                
                 ZoomToFit();
             }
         }
@@ -56,7 +64,7 @@ namespace BuldingMapper
         /// </summary>
         [Category("Appearance"),
          Description("The pen used to draw the zoom rectangle.")]
-        public Pen ZoomPen
+        public Pen? ZoomPen
         {
             get { return _zoomPen; }
             set
@@ -80,7 +88,6 @@ namespace BuldingMapper
 
             var widthZoom = (float)Width / _image.Width;
             var heightZoom = (float)Height / _image.Height;
-
             // Make sure the whole image is visible
             _zoom = widthZoom < heightZoom ? widthZoom : heightZoom;
 
@@ -192,7 +199,7 @@ namespace BuldingMapper
 
             // Turn of interpolation when zoomed
             e.Graphics.InterpolationMode = _imageZoomRect != null
-                ? InterpolationMode.NearestNeighbor
+                ? InterpolationMode.HighQualityBicubic
                 : InterpolationMode.Default;
 
             DrawImage(e);
@@ -209,7 +216,9 @@ namespace BuldingMapper
                 ? new Rectangle(0, 0, _image.Width, _image.Height)
                 : new Rectangle(0, 0, _imageZoomRect.Value.Width,
                     _imageZoomRect.Value.Height);
-
+            System.Diagnostics.Debug.Print("Zoom: " + _zoom);
+            System.Diagnostics.Debug.Print("Width: " + _image.Width);
+            System.Diagnostics.Debug.Print("Height: " + _image.Height);
             var sourceRec = !_imageZoomRect.HasValue
                 ? new Rectangle(0, 0, _image.Width, _image.Height)
                 : _imageZoomRect.Value;
