@@ -46,12 +46,12 @@
             saveFloorAsToolStripMenuItem = new ToolStripMenuItem();
             quitToolStripMenuItem = new ToolStripMenuItem();
             floorTabControl = new TabControl();
-            tabPage2 = new TabPage();
+            welcomeTab = new TabPage();
             label1 = new Label();
             toolStripTableLayoutPanel.SuspendLayout();
             toolStrip1.SuspendLayout();
             floorTabControl.SuspendLayout();
-            tabPage2.SuspendLayout();
+            welcomeTab.SuspendLayout();
             SuspendLayout();
             // 
             // toolStripTableLayoutPanel
@@ -97,7 +97,7 @@
             newToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
             newToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { newBuildingToolStripMenuItem, newFloorFromImageToolStripMenuItem, newFloorFromExistingFloorPlanToolStripMenuItem });
             newToolStripMenuItem.Name = "newToolStripMenuItem";
-            newToolStripMenuItem.Size = new Size(270, 34);
+            newToolStripMenuItem.Size = new Size(158, 34);
             newToolStripMenuItem.Text = "New";
             // 
             // newBuildingToolStripMenuItem
@@ -127,7 +127,7 @@
             openToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
             openToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openFloorToolStripMenuItem, openBuildingToolStripMenuItem });
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(270, 34);
+            openToolStripMenuItem.Size = new Size(158, 34);
             openToolStripMenuItem.Text = "Open";
             // 
             // openFloorToolStripMenuItem
@@ -149,7 +149,7 @@
             saveToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
             saveToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saveBuildingToolStripMenuItem, saveFloorToolStripMenuItem, saveBuildingAsToolStripMenuItem, saveFloorAsToolStripMenuItem });
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(270, 34);
+            saveToolStripMenuItem.Size = new Size(158, 34);
             saveToolStripMenuItem.Text = "Save";
             // 
             // saveBuildingToolStripMenuItem
@@ -186,13 +186,13 @@
             // 
             quitToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
             quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            quitToolStripMenuItem.Size = new Size(270, 34);
+            quitToolStripMenuItem.Size = new Size(158, 34);
             quitToolStripMenuItem.Text = "Quit";
             quitToolStripMenuItem.Click += quitToolStripMenuItem_Click;
             // 
             // floorTabControl
             // 
-            floorTabControl.Controls.Add(tabPage2);
+            floorTabControl.Controls.Add(welcomeTab);
             floorTabControl.Dock = DockStyle.Fill;
             floorTabControl.Location = new Point(3, 33);
             floorTabControl.Name = "floorTabControl";
@@ -200,15 +200,15 @@
             floorTabControl.Size = new Size(1253, 627);
             floorTabControl.TabIndex = 1;
             // 
-            // tabPage2
+            // welcomeTab
             // 
-            tabPage2.Controls.Add(label1);
-            tabPage2.Location = new Point(4, 34);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Size = new Size(1245, 589);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "Welcome";
-            tabPage2.UseVisualStyleBackColor = true;
+            welcomeTab.Controls.Add(label1);
+            welcomeTab.Location = new Point(4, 34);
+            welcomeTab.Name = "welcomeTab";
+            welcomeTab.Size = new Size(1245, 589);
+            welcomeTab.TabIndex = 1;
+            welcomeTab.Text = "Welcome";
+            welcomeTab.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -233,7 +233,7 @@
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             floorTabControl.ResumeLayout(false);
-            tabPage2.ResumeLayout(false);
+            welcomeTab.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -255,7 +255,7 @@
         private ToolStripMenuItem newFloorFromImageToolStripMenuItem;
         private ToolStripMenuItem newFloorFromExistingFloorPlanToolStripMenuItem;
         private TabControl floorTabControl;
-        private TabPage tabPage2;
+        private TabPage welcomeTab;
         private Label label1;
     }
 }

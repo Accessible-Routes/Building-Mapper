@@ -39,8 +39,10 @@
             chooseFileButton = new Button();
             selectedFileLabel = new Label();
             buildingNameTextbox = new TextBox();
-            label1 = new Label();
             noteLabel = new Label();
+            floorNameLabel = new Label();
+            label1 = new Label();
+            floorNameTextbox = new TextBox();
             openFileDialog1 = new OpenFileDialog();
             mainTableLayoutPanel.SuspendLayout();
             controlButtonPanel.SuspendLayout();
@@ -117,8 +119,10 @@
             propertiesTableLayoutPanel.Controls.Add(chooseFileButton, 0, 2);
             propertiesTableLayoutPanel.Controls.Add(selectedFileLabel, 1, 1);
             propertiesTableLayoutPanel.Controls.Add(buildingNameTextbox, 1, 0);
-            propertiesTableLayoutPanel.Controls.Add(label1, 1, 3);
-            propertiesTableLayoutPanel.Controls.Add(noteLabel, 0, 3);
+            propertiesTableLayoutPanel.Controls.Add(noteLabel, 0, 4);
+            propertiesTableLayoutPanel.Controls.Add(floorNameLabel, 0, 3);
+            propertiesTableLayoutPanel.Controls.Add(label1, 1, 2);
+            propertiesTableLayoutPanel.Controls.Add(floorNameTextbox, 1, 3);
             propertiesTableLayoutPanel.Dock = DockStyle.Fill;
             propertiesTableLayoutPanel.Location = new Point(3, 27);
             propertiesTableLayoutPanel.Name = "propertiesTableLayoutPanel";
@@ -126,8 +130,8 @@
             propertiesTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
             propertiesTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
             propertiesTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
-            propertiesTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 100F));
-            propertiesTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            propertiesTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            propertiesTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 90F));
             propertiesTableLayoutPanel.Size = new Size(466, 258);
             propertiesTableLayoutPanel.TabIndex = 0;
             // 
@@ -183,24 +187,43 @@
             buildingNameTextbox.TabIndex = 5;
             buildingNameTextbox.TextChanged += buildingNameTextbox_TextChanged;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(3, 226);
-            label1.Name = "label1";
-            label1.Size = new Size(0, 25);
-            label1.TabIndex = 1;
-            // 
             // noteLabel
             // 
             propertiesTableLayoutPanel.SetColumnSpan(noteLabel, 2);
             noteLabel.Dock = DockStyle.Fill;
-            noteLabel.Location = new Point(5, 131);
+            noteLabel.Location = new Point(5, 173);
             noteLabel.Margin = new Padding(5);
             noteLabel.Name = "noteLabel";
-            noteLabel.Size = new Size(456, 90);
+            noteLabel.Size = new Size(456, 80);
             noteLabel.TabIndex = 6;
             noteLabel.Text = "Note: You must select a floor plan image. The selected image will be added as an initial floor. More floors can be added later.";
+            // 
+            // floorNameLabel
+            // 
+            floorNameLabel.Dock = DockStyle.Fill;
+            floorNameLabel.Location = new Point(3, 126);
+            floorNameLabel.Name = "floorNameLabel";
+            floorNameLabel.Size = new Size(227, 42);
+            floorNameLabel.TabIndex = 7;
+            floorNameLabel.Text = "Floor Name";
+            floorNameLabel.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(236, 84);
+            label1.Name = "label1";
+            label1.Size = new Size(0, 25);
+            label1.TabIndex = 1;
+            // 
+            // floorNameTextbox
+            // 
+            floorNameTextbox.Dock = DockStyle.Fill;
+            floorNameTextbox.Location = new Point(237, 131);
+            floorNameTextbox.Margin = new Padding(4, 5, 4, 5);
+            floorNameTextbox.Name = "floorNameTextbox";
+            floorNameTextbox.Size = new Size(225, 31);
+            floorNameTextbox.TabIndex = 2;
             // 
             // openFileDialog1
             // 
@@ -241,5 +264,7 @@
         private Label label1;
         private Label noteLabel;
         private OpenFileDialog openFileDialog1;
+        private Label floorNameLabel;
+        private TextBox floorNameTextbox;
     }
 }

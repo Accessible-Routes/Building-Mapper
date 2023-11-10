@@ -32,7 +32,27 @@ namespace BuildingMapper
         private void newBuildingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             NewBuildingForm newBuildingForm = new NewBuildingForm();
-            newBuildingForm.ShowDialog();
+            NewBuildingFormResult result = newBuildingForm.ShowNewBuilding();
+
+            if (result.result == DialogResult.OK)
+            {
+                buildingName = result.buildingName;
+                this.Text = "Room Editor (" + buildingName + ")";
+                Image floorPlanImage = Image.FromFile(result.filepath);
+
+                TabPage tabPage = new TabPage(result.floorName);
+                floorTabControl.TabPages.Add(tabPage);
+
+                FloorEditor floorEditor = new FloorEditor();
+                floorEditor.Dock = DockStyle.Fill;
+
+                tabPage.Controls.Add(floorEditor);
+                floors.Add(floorEditor);
+
+                floorEditor.UpdateImage(floorPlanImage);
+
+                floorTabControl.TabPages.RemoveByKey("welcomeTab");
+            }
         }
     }
 }

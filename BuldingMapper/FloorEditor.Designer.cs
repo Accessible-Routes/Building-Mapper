@@ -208,15 +208,15 @@
             resetZoomButton.TabIndex = 1;
             resetZoomButton.Text = "Reset Zoom";
             resetZoomButton.UseVisualStyleBackColor = true;
+            resetZoomButton.Click += resetZoomButton_Click;
             // 
             // roomEditorPanel1
             // 
             roomEditorPanel1.Dock = DockStyle.Fill;
-            roomEditorPanel1.Image = Properties.Resources.Darrin_10;
+            roomEditorPanel1.Image = null;
             roomEditorPanel1.Location = new Point(3, 3);
             roomEditorPanel1.Name = "roomEditorPanel1";
             roomEditorPanel1.Size = new Size(644, 389);
-            roomEditorPanel1.Initialize();
             roomEditorPanel1.TabIndex = 1;
             // 
             // FloorEditor

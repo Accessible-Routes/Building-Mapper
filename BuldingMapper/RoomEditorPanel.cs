@@ -216,9 +216,7 @@ namespace BuildingMapper
                 ? new Rectangle(0, 0, _image.Width, _image.Height)
                 : new Rectangle(0, 0, _imageZoomRect.Value.Width,
                     _imageZoomRect.Value.Height);
-            System.Diagnostics.Debug.Print("Zoom: " + _zoom);
-            System.Diagnostics.Debug.Print("Width: " + _image.Width);
-            System.Diagnostics.Debug.Print("Height: " + _image.Height);
+
             var sourceRec = !_imageZoomRect.HasValue
                 ? new Rectangle(0, 0, _image.Width, _image.Height)
                 : _imageZoomRect.Value;

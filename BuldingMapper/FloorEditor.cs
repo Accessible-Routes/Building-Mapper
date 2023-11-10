@@ -29,10 +29,16 @@ namespace BuildingMapper
             }
         }
 
+        public void UpdateImage(Image image)
+        {
+            this.roomEditorPanel1.Image = image;
+            this.roomEditorPanel1.Initialize();
+        }
+
         private void addButton_Click(object sender, EventArgs e)
         {
             RoomEditorForm newForm = new RoomEditorForm(rooms);
-            RoomEditorResult result = newForm.ShowRoomEditor();
+            RoomEditorFormResult result = newForm.ShowRoomEditor();
 
             if (result.result == DialogResult.OK)
             {
@@ -40,6 +46,11 @@ namespace BuildingMapper
             }
 
             UpdateRoomList();
+        }
+
+        private void resetZoomButton_Click(object sender, EventArgs e)
+        {
+            roomEditorPanel1.ZoomToFit();
         }
     }
 }
