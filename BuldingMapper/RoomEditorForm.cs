@@ -178,7 +178,7 @@ namespace BuildingMapper
             string s = (string)connectionsCheckedListBox.SelectedItem;
         }
 
-        private bool isInList(string roomName)
+        private bool IsInList(string roomName)
         {
             foreach (Room r in newRooms)
             {
