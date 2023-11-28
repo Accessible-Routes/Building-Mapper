@@ -1,3 +1,6 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 namespace BuildingMapper
 {
     public partial class MainForm : Form
@@ -16,6 +19,16 @@ namespace BuildingMapper
 
         private void saveBuildingToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DialogResult result = folderBrowserDialog1.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                List<Floor> _data = Floor.ConvertToFloorObjects(floors);
+                System.Diagnostics.Debug.WriteLine(_data.Count);
+                var options = new JsonSerializerOptions { WriteIndented = true };
+                string jsonString = JsonSerializer.Serialize(_data, options);
+                File.WriteAllText(folderBrowserDialog1.SelectedPath + "/out.json", jsonString);
+            }
 
         }
 
@@ -43,7 +56,7 @@ namespace BuildingMapper
                 TabPage tabPage = new TabPage(result.floorName);
                 floorTabControl.TabPages.Add(tabPage);
 
-                FloorEditor floorEditor = new FloorEditor();
+                FloorEditor floorEditor = new FloorEditor(buildingName);
                 floorEditor.Dock = DockStyle.Fill;
 
                 tabPage.Controls.Add(floorEditor);

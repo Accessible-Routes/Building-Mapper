@@ -31,7 +31,8 @@ namespace BuildingMapper
 
     public partial class NewBuildingForm : Form
     {
-        string? filepath = null;
+        private string filepath = "";
+
         public NewBuildingForm()
         {
             InitializeComponent();
@@ -39,30 +40,15 @@ namespace BuildingMapper
 
         private void UpdateSaveButton()
         {
-            saveButton.Enabled = !string.IsNullOrEmpty(filepath) &&
-                !string.IsNullOrEmpty(buildingNameLabel.Text) &&
-                !string.IsNullOrEmpty(floorNameLabel.Text);
-        }
-
-        private void chooseFileButton_Click(object sender, EventArgs e)
-        {
-            openFileDialog1.ShowDialog();
-            filepath = openFileDialog1.FileName;
-            selectedFileLabel.Text = openFileDialog1.FileName;
-
-            UpdateSaveButton();
-
+            saveButton.Enabled = filepath != "" &&
+                buildingNameTextbox.Text != "" &&
+                floorNameTextbox.Text != "";
         }
 
         private void saveButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
             Close();
-        }
-
-        private void buildingNameTextbox_TextChanged(object sender, EventArgs e)
-        {
-            UpdateSaveButton();
         }
 
         public NewBuildingFormResult ShowNewBuilding()
@@ -80,6 +66,25 @@ namespace BuildingMapper
             }
 
             return result;
+        }
+
+        private void chooseFileButton_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.ShowDialog();
+            filepath = openFileDialog1.FileName;
+            selectedFileLabel.Text = openFileDialog1.FileName;
+
+            UpdateSaveButton();
+        }
+
+        private void floorNameTextbox_TextChanged(object sender, EventArgs e)
+        {
+            UpdateSaveButton();
+        }
+
+        private void buildingNameTextbox_TextChanged(object sender, EventArgs e)
+        {
+            UpdateSaveButton();
         }
     }
 }

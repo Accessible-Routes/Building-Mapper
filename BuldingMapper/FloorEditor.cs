@@ -12,18 +12,21 @@ namespace BuildingMapper
 {
     public partial class FloorEditor : UserControl
     {
-        List<Room> rooms = new List<Room>();
+        public List<Room> Rooms = new List<Room>();
 
-        public FloorEditor()
+        public string FloorName { get; set; }
+
+        public FloorEditor(string floorName)
         {
             InitializeComponent();
+            FloorName = floorName;
         }
 
         private void UpdateRoomList()
         {
             roomListBox.Items.Clear();
 
-            foreach (Room room in rooms)
+            foreach (Room room in Rooms)
             {
                 roomListBox.Items.Add(room.Name);
             }
@@ -37,12 +40,12 @@ namespace BuildingMapper
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            RoomEditorForm newForm = new RoomEditorForm(rooms);
+            RoomEditorForm newForm = new RoomEditorForm(Rooms);
             RoomEditorFormResult result = newForm.ShowRoomEditor();
 
             if (result.result == DialogResult.OK)
             {
-                rooms.AddRange(result.rooms);
+                Rooms.AddRange(result.rooms);
             }
 
             UpdateRoomList();

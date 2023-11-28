@@ -48,6 +48,7 @@
             floorTabControl = new TabControl();
             welcomeTab = new TabPage();
             label1 = new Label();
+            folderBrowserDialog1 = new FolderBrowserDialog();
             toolStripTableLayoutPanel.SuspendLayout();
             toolStrip1.SuspendLayout();
             floorTabControl.SuspendLayout();
@@ -257,5 +258,6 @@
         private TabControl floorTabControl;
         private TabPage welcomeTab;
         private Label label1;
+        private FolderBrowserDialog folderBrowserDialog1;
     }
 }
