@@ -43,9 +43,9 @@ namespace BuildingMapper
             RoomEditorForm newForm = new RoomEditorForm(Rooms);
             RoomEditorFormResult result = newForm.ShowRoomEditor();
 
-            if (result.result == DialogResult.OK)
+            if (result.DialogResult == DialogResult.OK)
             {
-                Rooms.AddRange(result.rooms);
+                Rooms.AddRange(result.Rooms);
             }
 
             UpdateRoomList();

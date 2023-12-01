@@ -47,13 +47,13 @@ namespace BuildingMapper
             NewBuildingForm newBuildingForm = new NewBuildingForm();
             NewBuildingFormResult result = newBuildingForm.ShowNewBuilding();
 
-            if (result.result == DialogResult.OK)
+            if (result.DialogResult == DialogResult.OK)
             {
-                buildingName = result.buildingName;
+                buildingName = result.BuildingName;
                 this.Text = "Room Editor (" + buildingName + ")";
-                Image floorPlanImage = Image.FromFile(result.filepath);
+                Image floorPlanImage = Image.FromFile(result.Filepath);
 
-                TabPage tabPage = new TabPage(result.floorName);
+                TabPage tabPage = new TabPage(result.FloorName);
                 floorTabControl.TabPages.Add(tabPage);
 
                 FloorEditor floorEditor = new FloorEditor(buildingName);
