@@ -10,23 +10,23 @@ using System.Windows.Forms;
 
 namespace BuildingMapper
 {
-    public struct NewBuildingFormResult
+    public class NewBuildingFormResult : FormResult
     {
-        public NewBuildingFormResult(DialogResult result, string buildingName, string floorName, string filepath)
+        public NewBuildingFormResult()
         {
-            this.result = result;
-            this.buildingName = buildingName;
-            this.filepath = filepath;
-            this.floorName = floorName;
+            BuildingName = string.Empty;
+            FloorName = string.Empty;
+            Filepath = string.Empty;
         }
 
-        public DialogResult result { get; }
 
-        public string buildingName { get; }
+        public DialogResult Result { get; set; }
 
-        public string floorName { get; }
+        public string BuildingName { get; set;  }
 
-        public string filepath { get; }
+        public string FloorName { get; set; }
+
+        public string Filepath { get; set; }
     }
 
     public partial class NewBuildingForm : Form
@@ -58,11 +58,20 @@ namespace BuildingMapper
 
             if (dialogResult == DialogResult.OK)
             {
-                result = new NewBuildingFormResult(dialogResult, buildingNameTextbox.Text, floorNameTextbox.Text, filepath);
+                result = new NewBuildingFormResult()
+                {
+                    DialogResult = dialogResult,
+                    BuildingName = buildingNameTextbox.Text,
+                    FloorName = floorNameTextbox.Text,
+                    Filepath = filepath
+                };
             }
             else
             {
-                result = new NewBuildingFormResult(dialogResult, "", "", "");
+                result = new NewBuildingFormResult()
+                {
+                    DialogResult = dialogResult
+                };
             }
 
             return result;
