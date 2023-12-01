@@ -10,17 +10,14 @@ using System.Windows.Forms;
 
 namespace BuildingMapper
 {
-    public struct RoomEditorFormResult
+    public class RoomEditorFormResult : FormResult
     {
-        public RoomEditorFormResult(DialogResult result, List<Room> rooms)
+        public List<Room> Rooms { get; set; }
+
+        public RoomEditorFormResult()
         {
-            this.result = result;
-            this.rooms = rooms;
+            Rooms = new List<Room>();
         }
-
-        public DialogResult result { get; }
-
-        public List<Room> rooms { get; }
     }
 
     public partial class RoomEditorForm : Form
@@ -102,11 +99,19 @@ namespace BuildingMapper
                 Enum.TryParse<RoomType>(roomTypeComboBox.SelectedItem.ToString(), true, out type);
                 room.Type = type;
                 newRooms.Add(room);
-                result = new RoomEditorFormResult(dialogResult, newRooms);
+                result = new RoomEditorFormResult() 
+                { 
+                    DialogResult = dialogResult, 
+                    Rooms = newRooms 
+                };
             }
             else
             {
-                result = new RoomEditorFormResult(dialogResult, new List<Room>());
+                result = new RoomEditorFormResult()
+                {
+                    DialogResult = dialogResult,
+                    Rooms = new List<Room>()
+                };
             }
 
             return result;
@@ -143,9 +148,9 @@ namespace BuildingMapper
             RoomEditorForm newForm = new RoomEditorForm(combinedRooms);
             RoomEditorFormResult result = newForm.ShowRoomEditor();
 
-            if (result.result == DialogResult.OK)
+            if (result.DialogResult == DialogResult.OK)
             {
-                newRooms.AddRange(result.rooms);
+                newRooms.AddRange(result.Rooms);
             }
 
             UpdateRoomList();
