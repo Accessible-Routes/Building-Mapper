@@ -7,12 +7,6 @@
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="NewBuildingForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="RoomEditorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="RoomEditorPanel.cs">
       <SubType>Component</SubType>
     </Compile>
