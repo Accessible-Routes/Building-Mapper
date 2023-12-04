@@ -41,11 +41,59 @@ namespace BuildingMapper
         private void addButton_Click(object sender, EventArgs e)
         {
             RoomEditorForm newForm = new RoomEditorForm(Rooms);
-            RoomEditorFormResult result = newForm.ShowRoomEditor();
+            RoomEditorFormResult result = newForm.ShowAddRoomEditor();
 
             if (result.DialogResult == DialogResult.OK)
             {
-                Rooms.AddRange(result.Rooms);
+                foreach (RoomChange change in result.Changes)
+                {
+                    switch (change.ChangeType)
+                    {
+                        case ChangeType.Add:
+                            if (change.NewRoom != null)
+                            {
+                                Rooms.Add(change.NewRoom);
+                            }
+                            else
+                            {
+                                throw new NullReferenceException();
+                            }
+                            break;
+
+                        case ChangeType.Edit:
+                            if (change.NewRoom != null)
+                            {
+                                foreach (Room room in Rooms)
+                                {
+                                    if (room.Name == change.Target)
+                                    {
+                                        Rooms.Remove(room);
+                                        Rooms.Add(change.NewRoom);
+                                        break;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                throw new NullReferenceException();
+                            }
+                            break;
+
+                        case ChangeType.Remove:
+                            foreach (Room room in Rooms)
+                            {
+                                if (room.Name == change.Target)
+                                {
+                                    Rooms.Remove(room);
+                                    break;
+                                }
+                            }
+                            break;
+
+                        default:
+                            throw new InvalidEnumArgumentException();
+                    }
+                }
             }
 
             UpdateRoomList();
