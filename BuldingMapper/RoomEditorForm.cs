@@ -104,10 +104,28 @@ namespace BuildingMapper
 
         public RoomEditorFormResult ShowAddRoomEditor()
         {
+            RoomBackup = new Room();
+
             DialogResult dialogResult = ShowDialog();
 
             RoomEditorFormResult result = GetFormResult(dialogResult, ChangeType.Add);
             
+            return result;
+        }
+
+        public RoomEditorFormResult ShowEditRoomEditor(Room roomToEdit)
+        {
+            //Might need to copy
+            RoomBackup = roomToEdit;
+
+            roomNameTextBox.Text = roomToEdit.Name;
+
+            roomTypeComboBox.SelectedItem = roomToEdit.Type.ToString();
+
+            DialogResult dialogResult = ShowDialog();
+
+            RoomEditorFormResult result = GetFormResult(dialogResult, ChangeType.Edit);
+
             return result;
         }
 
@@ -135,7 +153,7 @@ namespace BuildingMapper
             RoomChange newChange = new RoomChange()
             {
                 ChangeType = changeType,
-                Target = newRoom.Name,
+                Target = RoomBackup.Name,
                 NewRoom = newRoom
             };
 
