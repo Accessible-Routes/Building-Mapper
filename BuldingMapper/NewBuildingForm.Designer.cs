@@ -224,6 +224,7 @@
             floorNameTextbox.Name = "floorNameTextbox";
             floorNameTextbox.Size = new Size(225, 31);
             floorNameTextbox.TabIndex = 2;
+            floorNameTextbox.TextChanged += floorNameTextbox_TextChanged;
             // 
             // openFileDialog1
             // 

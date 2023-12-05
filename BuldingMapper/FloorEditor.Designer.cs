@@ -111,12 +111,14 @@
             // editButton
             // 
             editButton.Dock = DockStyle.Fill;
+            editButton.Enabled = false;
             editButton.Location = new Point(112, 0);
             editButton.Name = "editButton";
             editButton.Size = new Size(49, 35);
             editButton.TabIndex = 2;
             editButton.Text = "Edit";
             editButton.UseVisualStyleBackColor = true;
+            editButton.Click += editButton_Click;
             // 
             // RemoveButton
             // 
@@ -148,6 +150,7 @@
             roomListBox.Name = "roomListBox";
             roomListBox.Size = new Size(267, 399);
             roomListBox.TabIndex = 1;
+            roomListBox.SelectedIndexChanged += roomListBox_SelectedIndexChanged;
             // 
             // roomImageTablePanel
             // 

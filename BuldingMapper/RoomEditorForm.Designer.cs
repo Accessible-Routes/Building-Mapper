@@ -274,6 +274,7 @@
             // editButton
             // 
             editButton.Dock = DockStyle.Fill;
+            editButton.Enabled = false;
             editButton.Location = new Point(112, 0);
             editButton.Name = "editButton";
             editButton.Size = new Size(242, 50);
@@ -311,6 +312,7 @@
             connectionsCheckedListBox.Name = "connectionsCheckedListBox";
             connectionsCheckedListBox.Size = new Size(460, 165);
             connectionsCheckedListBox.TabIndex = 1;
+            connectionsCheckedListBox.SelectedIndexChanged += connectionsCheckedListBox_SelectedIndexChanged;
             // 
             // RoomEditorForm
             // 

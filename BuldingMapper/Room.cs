@@ -32,9 +32,9 @@ namespace BuildingMapper
 
         public List<AccessibilityTag> AccessibilityTags { get; set; }
 
-        public Room(string name)
+        public Room()
         {
-            Name = name;
+            Name = string.Empty;
             ConnectedRooms = new List<String>();
             AccessibilityTags = new List<AccessibilityTag>();
         }
