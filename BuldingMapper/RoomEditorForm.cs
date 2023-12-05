@@ -24,16 +24,6 @@ namespace BuildingMapper
         public Room? NewRoom;
     }
 
-    public class RoomEditorFormResult : FormResult
-    {
-        public List<RoomChange> Changes { get; set; }
-
-        public RoomEditorFormResult()
-        {
-            Changes = new List<RoomChange>();
-        }
-    }
-
     public partial class RoomEditorForm : Form
     {
         List<RoomChange> newChanges;

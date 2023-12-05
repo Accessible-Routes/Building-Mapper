@@ -9,26 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BuildingMapper
-{
-    public class NewBuildingFormResult : FormResult
-    {
-        public NewBuildingFormResult()
-        {
-            BuildingName = string.Empty;
-            FloorName = string.Empty;
-            Filepath = string.Empty;
-        }
-
-
-        public DialogResult Result { get; set; }
-
-        public string BuildingName { get; set;  }
-
-        public string FloorName { get; set; }
-
-        public string Filepath { get; set; }
-    }
-
+{ 
     public partial class NewBuildingForm : Form
     {
         private string filepath = "";
