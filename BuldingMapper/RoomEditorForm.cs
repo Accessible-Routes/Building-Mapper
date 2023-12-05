@@ -38,7 +38,7 @@ namespace BuildingMapper
 
             List<string> types = new List<string>();
 
-            //Add each RoomValue enum to a list as a string
+            //Add each RoomType enum to a list as a string
             foreach (RoomType type in Enum.GetValues(typeof(RoomType)))
             {
                 types.Add(type.ToString());
@@ -46,7 +46,7 @@ namespace BuildingMapper
 
             types.Sort();
 
-            //Add the sorted RoomValue list into the comboBox
+            //Add the sorted types list into the comboBox
             foreach (string type in types)
             {
                 roomTypeComboBox.Items.Add(type);
@@ -70,21 +70,9 @@ namespace BuildingMapper
 
             List<string> roomNames = new List<string>();
 
-            //Add each Room Name to a list as a string
-            foreach (Room r in existingRooms)
-            {
-                roomNames.Add(r.Name);
-            }
-
-            roomNames.Sort();
-
-            //Add the sorted AccesibilityTag list into the comboBox
-            foreach (string name in roomNames)
-            {
-                connectionsCheckedListBox.Items.Add(name);
-            }
-
             newChanges = new List<RoomChange>();
+
+            UpdateRoomList();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -99,18 +87,22 @@ namespace BuildingMapper
             DialogResult dialogResult = ShowDialog();
 
             RoomEditorFormResult result = GetFormResult(dialogResult, ChangeType.Add);
-            
+
             return result;
         }
 
         public RoomEditorFormResult ShowEditRoomEditor(Room roomToEdit)
         {
-            //Might need to copy
+            //TODO: Might need to copy
             RoomBackup = roomToEdit;
 
             roomNameTextBox.Text = roomToEdit.Name;
 
             roomTypeComboBox.SelectedItem = roomToEdit.Type.ToString();
+
+            //This is here to make sure that the Room List doesnt not contain
+            //the room we are working on
+            UpdateRoomList();
 
             DialogResult dialogResult = ShowDialog();
 
@@ -121,23 +113,8 @@ namespace BuildingMapper
 
         private RoomEditorFormResult GetFormResult(DialogResult dialogResult, ChangeType changeType)
         {
-            RoomType type;
-            
-            if(roomTypeComboBox.SelectedItem == null || !Enum.TryParse<RoomType>(roomTypeComboBox.SelectedItem.ToString(), true, out type))
-            {
-                type = RoomType.Unspecified;
-            }
-
-            //TODO: Parse selected connected rooms
-
-            //TODO: Parse selected accessibility tags
-
             //Create our new Room object w/ data entered
-            Room newRoom = new Room()
-            {
-                Name = roomNameTextBox.Text,
-                Type = type,
-            };
+            Room newRoom = GetThisRoom();
 
             //Create our RoomChange object w/ necessary data
             RoomChange newChange = new RoomChange()
@@ -220,11 +197,11 @@ namespace BuildingMapper
 
                     else if (change.ChangeType == ChangeType.Edit)
                     {
-                         if (change.Target == room.Name)
-                         {
+                        if (change.Target == room.Name)
+                        {
                             shouldBeAdded = false;
                             break;
-                         }
+                        }
                     }
                 }
 
@@ -258,6 +235,16 @@ namespace BuildingMapper
         {
             List<Room> combinedRooms = GetCombinedRooms(existingRooms, newChanges);
 
+            //We don't want to see the room we're working on in this list
+            foreach (Room room in combinedRooms)
+            {
+                if (room.Name == GetThisRoom().Name)
+                {
+                    combinedRooms.Remove(room);
+                    break;
+                }
+            }
+
             connectionsCheckedListBox.Items.Clear();
 
             List<string> roomNames = new List<string>();
@@ -277,21 +264,77 @@ namespace BuildingMapper
             }
 
             string s = (string)connectionsCheckedListBox.SelectedItem;
+
+            UpdateEditButton();
         }
-
-        //private bool IsInList(string roomName)
-        //{
-        //    foreach (Room r in newRooms)
-        //    {
-        //        if (r.Name == roomName) return true;
-        //    }
-
-        //    return false;
-        //}
 
         private void editButton_Click(object sender, EventArgs e)
         {
+            List<Room> combinedRooms = GetCombinedRooms(existingRooms, newChanges);
 
+            Room? selectedRoom = null;
+
+            foreach (Room r in combinedRooms)
+            {
+                if (connectionsCheckedListBox.SelectedItem.ToString() == r.Name)
+                {
+                    selectedRoom = r;
+                    break;
+                }
+            }
+
+            if (selectedRoom == null)
+            {
+                throw new Exception("Selected room not found in list of rooms");
+            }
+
+            RoomEditorForm newForm = new RoomEditorForm(combinedRooms);
+            RoomEditorFormResult result = newForm.ShowEditRoomEditor(selectedRoom);
+
+            if (result.DialogResult == DialogResult.OK)
+            {
+                newChanges.AddRange(result.Changes);
+            }
+
+            UpdateRoomList();
+        }
+
+        private Room GetThisRoom()
+        {
+            //TODO: Parse selected connected rooms
+
+            //TODO: Parse selected accessibility tags
+            RoomType type;
+
+            if (roomTypeComboBox.SelectedItem == null || !Enum.TryParse<RoomType>(roomTypeComboBox.SelectedItem.ToString(), true, out type))
+            {
+                type = RoomType.Unspecified;
+            }
+
+            Room thisRoom = new Room()
+            {
+                Name = roomNameTextBox.Text,
+                Type = type
+            };
+
+            return thisRoom;
+        }
+
+        private void UpdateEditButton()
+        {
+            if (connectionsCheckedListBox.SelectedItems.Count > 0)
+            {
+                editButton.Enabled = true;
+            }
+            else
+            {
+                editButton.Enabled = false;
+            }
+        }
+
+        private void connectionsCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateEditButton();
         }
     }
 }

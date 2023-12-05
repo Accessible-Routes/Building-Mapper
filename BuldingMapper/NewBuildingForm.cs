@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BuildingMapper
-{ 
+{
     public partial class NewBuildingForm : Form
     {
         private string filepath = "";
