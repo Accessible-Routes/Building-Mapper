@@ -75,10 +75,89 @@ namespace BuildingMapper
             UpdateRoomList();
         }
 
+        #region Event Functions
+
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            List<Room> combinedRooms = GetCombinedRooms(existingRooms, newChanges);
+
+            RoomEditorForm newForm = new RoomEditorForm(combinedRooms);
+            RoomEditorFormResult result = newForm.ShowAddRoomEditor();
+
+            if (result.DialogResult == DialogResult.OK)
+            {
+                newChanges.AddRange(result.Changes);
+            }
+
+            UpdateRoomList();
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            Close();
+        }
+
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateSaveButton();
         }
+
+        private void connectionsCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateEditButton();
+        }
+
+        private void editButton_Click(object sender, EventArgs e)
+        {
+            List<Room> combinedRooms = GetCombinedRooms(existingRooms, newChanges);
+
+            Room? selectedRoom = null;
+
+            foreach (Room r in combinedRooms)
+            {
+                if (connectionsCheckedListBox.SelectedItem.ToString() == r.Name)
+                {
+                    selectedRoom = r;
+                    break;
+                }
+            }
+
+            if (selectedRoom == null)
+            {
+                throw new Exception("Selected room not found in list of rooms");
+            }
+
+            RoomEditorForm newForm = new RoomEditorForm(combinedRooms);
+            RoomEditorFormResult result = newForm.ShowEditRoomEditor(selectedRoom);
+
+            if (result.DialogResult == DialogResult.OK)
+            {
+                newChanges.AddRange(result.Changes);
+            }
+
+            UpdateRoomList();
+        }
+
+        private void removeButton_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void roomNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            UpdateSaveButton();
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+            Close();
+        }
+
+
+
+
+        #endregion
 
         public RoomEditorFormResult ShowAddRoomEditor()
         {
@@ -113,7 +192,8 @@ namespace BuildingMapper
 
         private RoomEditorFormResult GetFormResult(DialogResult dialogResult, ChangeType changeType)
         {
-            //Create our new Room object w/ data entered
+            //Create our new Room object w/
+            //data entered
             Room newRoom = GetThisRoom();
 
             //Create our RoomChange object w/ necessary data
@@ -135,42 +215,14 @@ namespace BuildingMapper
             return formResult;
         }
 
-        private void roomNameTextBox_TextChanged(object sender, EventArgs e)
-        {
-            UpdateSaveButton();
-        }
+
 
         private void UpdateSaveButton()
         {
             saveButton.Enabled = roomNameTextBox.Text != "" && roomTypeComboBox.SelectedItem != null;
         }
 
-        private void saveButton_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.OK;
-            Close();
-        }
 
-        private void cancelButton_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-            Close();
-        }
-
-        private void addButton_Click(object sender, EventArgs e)
-        {
-            List<Room> combinedRooms = GetCombinedRooms(existingRooms, newChanges);
-
-            RoomEditorForm newForm = new RoomEditorForm(combinedRooms);
-            RoomEditorFormResult result = newForm.ShowAddRoomEditor();
-
-            if (result.DialogResult == DialogResult.OK)
-            {
-                newChanges.AddRange(result.Changes);
-            }
-
-            UpdateRoomList();
-        }
 
         private List<Room> GetCombinedRooms(List<Room> rooms, List<RoomChange> changes)
         {
@@ -268,36 +320,7 @@ namespace BuildingMapper
             UpdateEditButton();
         }
 
-        private void editButton_Click(object sender, EventArgs e)
-        {
-            List<Room> combinedRooms = GetCombinedRooms(existingRooms, newChanges);
 
-            Room? selectedRoom = null;
-
-            foreach (Room r in combinedRooms)
-            {
-                if (connectionsCheckedListBox.SelectedItem.ToString() == r.Name)
-                {
-                    selectedRoom = r;
-                    break;
-                }
-            }
-
-            if (selectedRoom == null)
-            {
-                throw new Exception("Selected room not found in list of rooms");
-            }
-
-            RoomEditorForm newForm = new RoomEditorForm(combinedRooms);
-            RoomEditorFormResult result = newForm.ShowEditRoomEditor(selectedRoom);
-
-            if (result.DialogResult == DialogResult.OK)
-            {
-                newChanges.AddRange(result.Changes);
-            }
-
-            UpdateRoomList();
-        }
 
         private Room GetThisRoom()
         {
@@ -332,9 +355,6 @@ namespace BuildingMapper
             }
         }
 
-        private void connectionsCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdateEditButton();
-        }
+
     }
 }
