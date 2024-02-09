@@ -8,11 +8,6 @@ namespace BuildingMapper
 {
     public class RoomEditorFormResult : FormResult
     {
-        public List<RoomChange> Changes { get; set; }
 
-        public RoomEditorFormResult()
-        {
-            Changes = new List<RoomChange>();
-        }
     }
 }
