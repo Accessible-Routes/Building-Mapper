@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using BuildingMapper.FormResults;
 
 namespace BuildingMapper
 {
@@ -8,7 +9,7 @@ namespace BuildingMapper
         string? buildingName = null;
         List<FloorEditor> floors = new List<FloorEditor>();
 
-
+        private bool buildingSaved = true;
 
         public MainForm()
         {
@@ -48,11 +49,21 @@ namespace BuildingMapper
             NewBuildingFormResult result = newBuildingForm.ShowNewBuilding();
 
             if (result.DialogResult == DialogResult.OK)
-            {
+            {   
+                //Save building name and change window text
                 buildingName = result.BuildingName;
-                this.Text = "Room Editor (" + buildingName + ")";
+                this.Text = "Building Editor (" + buildingName + ")";
+
+                //Load selected image
                 Image floorPlanImage = Image.FromFile(result.Filepath);
 
+                //Make sure the user wanted to do this without saving
+                if (!buildingSaved)
+                {
+
+                }
+
+                //Create tab for floor selected in new building form
                 TabPage tabPage = new TabPage(result.FloorName);
                 floorTabControl.TabPages.Add(tabPage);
 
@@ -66,6 +77,11 @@ namespace BuildingMapper
 
                 floorTabControl.TabPages.RemoveByKey("welcomeTab");
             }
+        }
+
+        private void WarnUserAboutSaving()
+        {
+
         }
     }
 }

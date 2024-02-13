@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BuildingMapper
+namespace BuildingMapper.FormResults
 {
     public class RoomEditorFormResult : FormResult
     {
