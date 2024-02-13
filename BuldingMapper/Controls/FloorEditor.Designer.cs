@@ -1,4 +1,6 @@
-﻿namespace BuildingMapper
+﻿using BuildingMapper.Controls;
+
+namespace BuildingMapper
 {
     partial class FloorEditor
     {
