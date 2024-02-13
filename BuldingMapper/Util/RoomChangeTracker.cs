@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BuildingMapper
+namespace BuildingMapper.Util
 {
     public class RoomChangeTracker
     {
         private List<Room> preexistingRooms;
-        private List<Room> addedRooms   = new List<Room>();
-        private List<Room> editedRooms  = new List<Room>();
+        private List<Room> addedRooms = new List<Room>();
+        private List<Room> editedRooms = new List<Room>();
         private List<Room> removedRooms = new List<Room>();
 
         private List<string> editedRoomNames = new List<string>();
 
-        public RoomChangeTracker(List<Room> preexistingRooms) 
+        public RoomChangeTracker(List<Room> preexistingRooms)
         {
             this.preexistingRooms = preexistingRooms;
         }
@@ -53,7 +53,7 @@ namespace BuildingMapper
                 AddRoom(room);
             }
 
-            foreach (Room room in toMerge.editedRooms) 
+            foreach (Room room in toMerge.editedRooms)
             {
                 EditRoom(room, room.Name);
             }
@@ -66,7 +66,7 @@ namespace BuildingMapper
 
         public bool DoesRoomExist(string roomName)
         {
-            return RoomListContainsRoom(preexistingRooms, roomName) 
+            return RoomListContainsRoom(preexistingRooms, roomName)
                 || RoomListContainsRoom(addedRooms, roomName)
                 || RoomListContainsRoom(editedRooms, roomName);
         }
@@ -75,7 +75,7 @@ namespace BuildingMapper
         {
             //If a room with the same name that we're adding already existed but was removed
             if (RoomListContainsRoom(removedRooms, addedRoom.Name))
-            {   
+            {
                 //If this room existed before this add, this is technically an edit.
                 if (RoomListContainsRoom(preexistingRooms, addedRoom.Name))
                 {
@@ -94,8 +94,8 @@ namespace BuildingMapper
             addedRooms.Add(addedRoom);
         }
 
-        public void EditRoom(Room editedRoom, string oldName) 
-        {            
+        public void EditRoom(Room editedRoom, string oldName)
+        {
             //If the room we want to edit has already been edited, it will be in the edited rooms list
             if (RoomListContainsRoom(editedRooms, oldName))
             {
@@ -118,7 +118,7 @@ namespace BuildingMapper
             editedRooms.Add(editedRoom);
             editedRoomNames.Add(oldName);
         }
-        public void RemoveRoom(Room removedRoom) 
+        public void RemoveRoom(Room removedRoom)
         {
             //If the room was recently added
             if (RoomListContainsRoom(addedRooms, removedRoom.Name))
@@ -127,13 +127,14 @@ namespace BuildingMapper
             }
 
             //If the room was edited
-            if (RoomListContainsRoom(editedRooms, removedRoom.Name)) {
+            if (RoomListContainsRoom(editedRooms, removedRoom.Name))
+            {
                 RemoveRoomFromRoomList(removedRoom.Name, editedRooms);
             }
 
             removedRooms.Add(removedRoom);
         }
-    
+
         //TODO: Make naming scheme consistent
         private bool RoomListContainsRoom(List<Room> roomList, string room)
         {
@@ -155,7 +156,7 @@ namespace BuildingMapper
                 }
             }
         }
-    
+
         private bool RoomWasEdited(string roomName)
         {
             foreach (string n in editedRoomNames)

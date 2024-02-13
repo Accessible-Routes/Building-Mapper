@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BuildingMapper
+namespace BuildingMapper.Util
 {
     public enum RoomType
     {
@@ -24,18 +24,18 @@ namespace BuildingMapper
 
     public class Room
     {
-        public String Name { get; set; }
+        public string Name { get; set; }
 
         public RoomType Type { get; set; }
 
-        public List<String> ConnectedRooms { get; set; }
+        public List<string> ConnectedRooms { get; set; }
 
         public List<AccessibilityTag> AccessibilityTags { get; set; }
 
         public Room()
         {
             Name = string.Empty;
-            ConnectedRooms = new List<String>();
+            ConnectedRooms = new List<string>();
             AccessibilityTags = new List<AccessibilityTag>();
         }
     }
