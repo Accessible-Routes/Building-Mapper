@@ -85,7 +85,7 @@ namespace BuildingMapper
 
         private void connectionsCheckedListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdateEditButton();
+
         }
 
         private void editButton_Click(object sender, EventArgs e)
@@ -232,8 +232,6 @@ namespace BuildingMapper
             }
 
             string s = (string)connectionsCheckedListBox.SelectedItem;
-
-            UpdateEditButton();
         }
 
         private Room GetThisRoom()
@@ -255,18 +253,6 @@ namespace BuildingMapper
             };
 
             return thisRoom;
-        }
-
-        private void UpdateEditButton()
-        {
-            if (connectionsCheckedListBox.SelectedItems.Count > 0)
-            {
-                editButton.Enabled = true;
-            }
-            else
-            {
-                editButton.Enabled = false;
-            }
         }
 
 

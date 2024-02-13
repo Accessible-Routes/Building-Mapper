@@ -13,6 +13,8 @@ namespace BuildingMapper
         private List<Room> editedRooms  = new List<Room>();
         private List<Room> removedRooms = new List<Room>();
 
+        private List<string> editedRoomNames = new List<string>();
+
         public RoomChangeTracker(List<Room> preexistingRooms) 
         {
             this.preexistingRooms = preexistingRooms;
@@ -24,9 +26,9 @@ namespace BuildingMapper
 
             foreach (Room room in preexistingRooms)
             {
-                if (!RoomListContainsRoom(editedRooms, room.Name) 
-                    && !RoomListContainsRoom(removedRooms, room.Name))
+                if (!RoomWasEdited(room.Name) && !RoomListContainsRoom(removedRooms, room.Name))
                 {
+                    System.Diagnostics.Debug.WriteLine(room.Name);
                     rooms.Add(room);
                 }
             }
@@ -93,12 +95,13 @@ namespace BuildingMapper
         }
 
         public void EditRoom(Room editedRoom, string oldName) 
-        {
+        {            
             //If the room we want to edit has already been edited, it will be in the edited rooms list
             if (RoomListContainsRoom(editedRooms, oldName))
             {
                 RemoveRoomFromRoomList(oldName, editedRooms);
                 editedRooms.Add(editedRoom);
+                editedRoomNames.Add(oldName);
                 return;
             }
 
@@ -107,11 +110,13 @@ namespace BuildingMapper
             {
                 RemoveRoomFromRoomList(oldName, addedRooms);
                 addedRooms.Add(editedRoom);
+                editedRoomNames.Add(oldName);
                 return;
             }
 
             //Else, we're just editing a preexisting room
             editedRooms.Add(editedRoom);
+            editedRoomNames.Add(oldName);
         }
         public void RemoveRoom(Room removedRoom) 
         {
@@ -151,6 +156,17 @@ namespace BuildingMapper
             }
         }
     
-    
+        private bool RoomWasEdited(string roomName)
+        {
+            foreach (string n in editedRoomNames)
+            {
+                if (n.Equals(roomName))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }
