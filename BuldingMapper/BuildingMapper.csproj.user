@@ -16,5 +16,8 @@
     <Compile Update="Controls\RoomEditorPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Forms\SaveWarningForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

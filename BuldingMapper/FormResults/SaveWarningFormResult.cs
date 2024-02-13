@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace BuildingMapper.FormResults
 {
-    internal class SaveWarningFormResult
+    public class SaveWarningFormResult : FormResult
     {
+
     }
 }

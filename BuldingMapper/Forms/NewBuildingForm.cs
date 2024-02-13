@@ -77,5 +77,10 @@ namespace BuildingMapper
         {
             UpdateSaveButton();
         }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

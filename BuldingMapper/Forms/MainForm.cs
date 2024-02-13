@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using BuildingMapper.FormResults;
+using BuildingMapper.Forms;
 using BuildingMapper.Util;
 
 namespace BuildingMapper
@@ -50,19 +51,27 @@ namespace BuildingMapper
             NewBuildingFormResult result = newBuildingForm.ShowNewBuilding();
 
             if (result.DialogResult == DialogResult.OK)
-            {   
+            {
+                //Make sure the user wanted to do this without saving
+                if (!buildingSaved)
+                {
+                    SaveWarningForm newSaveWarning = new SaveWarningForm();
+                    SaveWarningFormResult warningResult = newSaveWarning.ShowDialog(buildingName);
+
+                    if (warningResult.DialogResult != DialogResult.OK)
+                    {
+                        return;
+                    }
+                }
+
+                buildingSaved = false;
+
                 //Save building name and change window text
                 buildingName = result.BuildingName;
                 this.Text = "Building Editor (" + buildingName + ")";
 
                 //Load selected image
                 Image floorPlanImage = Image.FromFile(result.Filepath);
-
-                //Make sure the user wanted to do this without saving
-                if (!buildingSaved)
-                {
-
-                }
 
                 //Create tab for floor selected in new building form
                 TabPage tabPage = new TabPage(result.FloorName);
