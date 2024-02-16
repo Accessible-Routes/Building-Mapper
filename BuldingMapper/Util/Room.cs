@@ -30,13 +30,13 @@ namespace BuildingMapper.Util
 
         public List<string> ConnectedRooms { get; set; }
 
-        public List<AccessibilityTag> AccessibilityTags { get; set; }
+        public List<string> AccessibilityTags { get; set; }
 
         public Room()
         {
             Name = string.Empty;
             ConnectedRooms = new List<string>();
-            AccessibilityTags = new List<AccessibilityTag>();
+            AccessibilityTags = new List<string>();
         }
     }
 }

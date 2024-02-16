@@ -15,6 +15,7 @@ namespace BuildingMapper
     public partial class RoomEditorForm : Form
     {
         RoomChangeTracker roomChangeTracker;
+
         public RoomEditorForm(RoomChangeTracker roomChangeTracker)
         {
             InitializeComponent();
@@ -37,25 +38,9 @@ namespace BuildingMapper
                 roomTypeComboBox.Items.Add(type);
             }
 
-            List<string> tags = new List<string>();
+            UpdateTagList(GetThisRoom());
 
-            //Add each AccesibilityTag enum to a list as a string
-            foreach (AccessibilityTag tag in Enum.GetValues(typeof(AccessibilityTag)))
-            {
-                tags.Add(tag.ToString());
-            }
-
-            tags.Sort();
-
-            //Add the sorted AccesibilityTag list into the comboBox
-            foreach (string tag in tags)
-            {
-                tagsListCheckbox.Items.Add(tag);
-            }
-
-            List<string> roomNames = new List<string>();
-
-            UpdateRoomList();
+            UpdateRoomList(GetThisRoom());
         }
 
         #region Event Functions
@@ -71,7 +56,7 @@ namespace BuildingMapper
                 roomChangeTracker.MergeRoomTracker(newRCT);
             }
 
-            UpdateRoomList();
+            UpdateRoomList(GetThisRoom());
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -120,7 +105,7 @@ namespace BuildingMapper
                 roomChangeTracker.MergeRoomTracker(newRCT);
             }
 
-            UpdateRoomList();
+            UpdateRoomList(GetThisRoom());
         }
 
         private void removeButton_Click(object sender, EventArgs e)
@@ -145,7 +130,7 @@ namespace BuildingMapper
 
             roomChangeTracker.RemoveRoom(selectedRoom);
 
-            UpdateRoomList();
+            UpdateRoomList(GetThisRoom());
         }
         private void roomNameTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -176,14 +161,14 @@ namespace BuildingMapper
 
         public RoomEditorFormResult ShowEditRoomEditor(Room roomToEdit, string oldName)
         {
-
             roomNameTextBox.Text = roomToEdit.Name;
 
             roomTypeComboBox.SelectedItem = roomToEdit.Type.ToString();
 
-            //This is here to make sure that the Room List doesnt not contain
-            //the room we are working on
-            UpdateRoomList();
+
+
+            UpdateTagList(roomToEdit);
+            UpdateRoomList(roomToEdit);
 
             DialogResult dialogResult = ShowDialog();
 
@@ -200,7 +185,7 @@ namespace BuildingMapper
             saveButton.Enabled = roomNameTextBox.Text != "" && roomTypeComboBox.SelectedItem != null;
         }
 
-        private void UpdateRoomList()
+        private void UpdateRoomList(Room currentRoom)
         {
             List<Room> combinedRooms = roomChangeTracker.CollectRooms();
 
@@ -226,20 +211,73 @@ namespace BuildingMapper
 
             roomNames.Sort();
 
-            //Add the sorted room names list into the comboBox
+            //Add the sorted room names list into the list box
+            int index = 0;
             foreach (string name in roomNames)
             {
                 connectionsCheckedListBox.Items.Add(name);
+
+                //Mark our checkbox if the room is connected
+                if (currentRoom.ConnectedRooms.Contains(name))
+                {
+                    connectionsCheckedListBox.SetItemChecked(index, true);
+                }
+
+                index++;
             }
 
             string s = (string)connectionsCheckedListBox.SelectedItem;
         }
 
+        private void UpdateTagList(Room currentRoom)
+        {
+            tagsListCheckbox.Items.Clear();
+
+            List<string> tags = new List<string>();
+
+            //Add each AccesibilityTag enum to a list as a string
+            foreach (AccessibilityTag tag in Enum.GetValues(typeof(AccessibilityTag)))
+            {
+                tags.Add(tag.ToString());
+            }
+
+            tags.Sort();
+
+            //Add the sorted AccesibilityTag list into the list box
+            int index = 0;
+            foreach (string tag in tags)
+            {
+                tagsListCheckbox.Items.Add(tag);
+
+                //Check the tag if it's been selected
+                if (currentRoom.AccessibilityTags.Contains(tag))
+                {
+                    tagsListCheckbox.SetItemChecked(index, true);
+                }
+
+                index++;
+            }
+        }
+
         private Room GetThisRoom()
         {
-            //TODO: Parse selected connected rooms
+            //Get selected connected rooms
+            List<string> selectedConnections = new List<string>();
 
-            //TODO: Parse selected accessibility tags
+            foreach (string r in connectionsCheckedListBox.CheckedItems)
+            {
+                selectedConnections.Add(r);
+            }
+
+
+            //Get selected accessibility tags
+            List<string> selectedTags = new List<string>();
+
+            foreach (string r in tagsListCheckbox.CheckedItems)
+            {
+                selectedTags.Add(r);
+            }
+
             RoomType type;
 
             if (roomTypeComboBox.SelectedItem == null || !Enum.TryParse<RoomType>(roomTypeComboBox.SelectedItem.ToString(), true, out type))
@@ -250,6 +288,8 @@ namespace BuildingMapper
             Room thisRoom = new Room()
             {
                 Name = roomNameTextBox.Text,
+                ConnectedRooms = selectedConnections,
+                AccessibilityTags = selectedTags,
                 Type = type
             };
 
