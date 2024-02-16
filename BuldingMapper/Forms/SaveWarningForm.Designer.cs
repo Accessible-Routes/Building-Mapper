@@ -90,6 +90,7 @@
             warningTextLabel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             warningTextLabel.Location = new Point(3, 0);
             warningTextLabel.Name = "warningTextLabel";
+            warningTextLabel.Padding = new Padding(5);
             warningTextLabel.Size = new Size(322, 144);
             warningTextLabel.TabIndex = 1;
             warningTextLabel.Text = "label1";

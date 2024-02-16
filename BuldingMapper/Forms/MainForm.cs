@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using BuildingMapper.FormResults;
@@ -12,6 +13,7 @@ namespace BuildingMapper
         List<FloorEditor> floors = new List<FloorEditor>();
 
         private bool buildingSaved = true;
+        private string saveFile = string.Empty;
 
         public MainForm()
         {
@@ -22,17 +24,18 @@ namespace BuildingMapper
 
         private void saveBuildingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult result = folderBrowserDialog1.ShowDialog();
-
-            if (result == DialogResult.OK)
+            //If we don't have an established save file, this should act like a save as
+            if (saveFile == string.Empty)
+            {
+                saveBuildingAsToolStripMenuItem_Click(sender, e);
+            }
+            else
             {
                 List<Floor> _data = Floor.ConvertToFloorObjects(floors);
-                System.Diagnostics.Debug.WriteLine(_data.Count);
                 var options = new JsonSerializerOptions { WriteIndented = true };
                 string jsonString = JsonSerializer.Serialize(_data, options);
-                File.WriteAllText(folderBrowserDialog1.SelectedPath + "/out.json", jsonString);
+                File.WriteAllText(saveFile, jsonString);
             }
-
         }
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -40,10 +43,6 @@ namespace BuildingMapper
             Close();
         }
 
-        private void saveFloorAsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void newBuildingToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -64,6 +63,9 @@ namespace BuildingMapper
                     }
                 }
 
+                //Remove other tabs
+                floorTabControl.TabPages.Clear();
+
                 buildingSaved = false;
 
                 //Save building name and change window text
@@ -77,6 +79,7 @@ namespace BuildingMapper
                 TabPage tabPage = new TabPage(result.FloorName);
                 floorTabControl.TabPages.Add(tabPage);
 
+                //Create floor editor for new floor
                 FloorEditor floorEditor = new FloorEditor(buildingName);
                 floorEditor.Dock = DockStyle.Fill;
 
@@ -85,13 +88,30 @@ namespace BuildingMapper
 
                 floorEditor.UpdateImage(floorPlanImage);
 
-                floorTabControl.TabPages.RemoveByKey("welcomeTab");
+
             }
         }
 
         private void WarnUserAboutSaving()
         {
 
+        }
+
+        private void saveBuildingAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult result = saveBuildingDialog.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                List<Floor> _data = Floor.ConvertToFloorObjects(floors);
+                System.Diagnostics.Debug.WriteLine(_data.Count);
+                var options = new JsonSerializerOptions { WriteIndented = true };
+                string jsonString = JsonSerializer.Serialize(_data, options);
+                saveFile = saveBuildingDialog.FileName;
+                File.WriteAllText(saveFile, jsonString);
+
+                buildingSaved = true;
+            }
         }
     }
 }

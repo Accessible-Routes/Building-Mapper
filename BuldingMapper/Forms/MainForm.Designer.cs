@@ -41,14 +41,13 @@
             openBuildingToolStripMenuItem = new ToolStripMenuItem();
             saveToolStripMenuItem = new ToolStripMenuItem();
             saveBuildingToolStripMenuItem = new ToolStripMenuItem();
-            saveFloorToolStripMenuItem = new ToolStripMenuItem();
             saveBuildingAsToolStripMenuItem = new ToolStripMenuItem();
-            saveFloorAsToolStripMenuItem = new ToolStripMenuItem();
             quitToolStripMenuItem = new ToolStripMenuItem();
             floorTabControl = new TabControl();
             welcomeTab = new TabPage();
             label1 = new Label();
-            folderBrowserDialog1 = new FolderBrowserDialog();
+            saveBuildingDialog = new SaveFileDialog();
+            openImageDialog = new OpenFileDialog();
             toolStripTableLayoutPanel.SuspendLayout();
             toolStrip1.SuspendLayout();
             floorTabControl.SuspendLayout();
@@ -148,7 +147,7 @@
             // saveToolStripMenuItem
             // 
             saveToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            saveToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saveBuildingToolStripMenuItem, saveFloorToolStripMenuItem, saveBuildingAsToolStripMenuItem, saveFloorAsToolStripMenuItem });
+            saveToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { saveBuildingToolStripMenuItem, saveBuildingAsToolStripMenuItem });
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             saveToolStripMenuItem.Size = new Size(158, 34);
             saveToolStripMenuItem.Text = "Save";
@@ -161,27 +160,13 @@
             saveBuildingToolStripMenuItem.Text = "Save Building";
             saveBuildingToolStripMenuItem.Click += saveBuildingToolStripMenuItem_Click;
             // 
-            // saveFloorToolStripMenuItem
-            // 
-            saveFloorToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            saveFloorToolStripMenuItem.Name = "saveFloorToolStripMenuItem";
-            saveFloorToolStripMenuItem.Size = new Size(257, 34);
-            saveFloorToolStripMenuItem.Text = "Save Floor";
-            // 
             // saveBuildingAsToolStripMenuItem
             // 
             saveBuildingAsToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
             saveBuildingAsToolStripMenuItem.Name = "saveBuildingAsToolStripMenuItem";
             saveBuildingAsToolStripMenuItem.Size = new Size(257, 34);
             saveBuildingAsToolStripMenuItem.Text = "Save Building As...";
-            // 
-            // saveFloorAsToolStripMenuItem
-            // 
-            saveFloorAsToolStripMenuItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            saveFloorAsToolStripMenuItem.Name = "saveFloorAsToolStripMenuItem";
-            saveFloorAsToolStripMenuItem.Size = new Size(257, 34);
-            saveFloorAsToolStripMenuItem.Text = "Save Floor As...";
-            saveFloorAsToolStripMenuItem.Click += saveFloorAsToolStripMenuItem_Click;
+            saveBuildingAsToolStripMenuItem.Click += saveBuildingAsToolStripMenuItem_Click;
             // 
             // quitToolStripMenuItem
             // 
@@ -221,6 +206,10 @@
             label1.Text = "Create a new building or open an existing building file";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // openImageDialog
+            // 
+            openImageDialog.FileName = "openFileDialog1";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -247,9 +236,7 @@
         private ToolStripMenuItem openBuildingToolStripMenuItem;
         private ToolStripMenuItem saveToolStripMenuItem;
         private ToolStripMenuItem saveBuildingToolStripMenuItem;
-        private ToolStripMenuItem saveFloorToolStripMenuItem;
         private ToolStripMenuItem saveBuildingAsToolStripMenuItem;
-        private ToolStripMenuItem saveFloorAsToolStripMenuItem;
         private ToolStripMenuItem quitToolStripMenuItem;
         private ToolStripMenuItem newToolStripMenuItem;
         private ToolStripMenuItem newBuildingToolStripMenuItem;
@@ -258,6 +245,7 @@
         private TabControl floorTabControl;
         private TabPage welcomeTab;
         private Label label1;
-        private FolderBrowserDialog folderBrowserDialog1;
+        private SaveFileDialog saveBuildingDialog;
+        private OpenFileDialog openImageDialog;
     }
 }
