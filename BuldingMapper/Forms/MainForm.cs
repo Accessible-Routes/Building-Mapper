@@ -12,6 +12,7 @@ namespace BuildingMapper
         string? buildingName = null;
         List<FloorEditor> floors = new List<FloorEditor>();
 
+        //State data
         private bool buildingSaved = true;
         private string saveFile = string.Empty;
 
@@ -21,28 +22,7 @@ namespace BuildingMapper
         }
 
 
-
-        private void saveBuildingToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //If we don't have an established save file, this should act like a save as
-            if (saveFile == string.Empty)
-            {
-                saveBuildingAsToolStripMenuItem_Click(sender, e);
-            }
-            else
-            {
-                List<Floor> _data = Floor.ConvertToFloorObjects(floors);
-                var options = new JsonSerializerOptions { WriteIndented = true };
-                string jsonString = JsonSerializer.Serialize(_data, options);
-                File.WriteAllText(saveFile, jsonString);
-            }
-        }
-
-        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
+        #region Event Functions
 
         private void newBuildingToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -92,9 +72,9 @@ namespace BuildingMapper
             }
         }
 
-        private void WarnUserAboutSaving()
+        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Close();
         }
 
         private void saveBuildingAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -113,5 +93,25 @@ namespace BuildingMapper
                 buildingSaved = true;
             }
         }
-    }
+
+        private void saveBuildingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //If we don't have an established save file, this should act like a save as
+            if (saveFile == string.Empty)
+            {
+                saveBuildingAsToolStripMenuItem_Click(sender, e);
+            }
+            else
+            {
+                List<Floor> _data = Floor.ConvertToFloorObjects(floors);
+                var options = new JsonSerializerOptions { WriteIndented = true };
+                string jsonString = JsonSerializer.Serialize(_data, options);
+                File.WriteAllText(saveFile, jsonString);
+            }
+
+            buildingSaved = true;
+        }
+
+        #endregion
+    } 
 }

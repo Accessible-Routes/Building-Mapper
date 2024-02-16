@@ -200,7 +200,6 @@ namespace BuildingMapper
             saveButton.Enabled = roomNameTextBox.Text != "" && roomTypeComboBox.SelectedItem != null;
         }
 
-
         private void UpdateRoomList()
         {
             List<Room> combinedRooms = roomChangeTracker.CollectRooms();
