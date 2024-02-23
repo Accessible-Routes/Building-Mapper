@@ -83,6 +83,7 @@ namespace BuildingMapper
 
             if (result == DialogResult.OK)
             {
+                saveBuildingDialog.FileName = buildingName;
                 List<Floor> _data = Floor.ConvertToFloorObjects(floors);
                 System.Diagnostics.Debug.WriteLine(_data.Count);
                 var options = new JsonSerializerOptions { WriteIndented = true };
@@ -113,5 +114,5 @@ namespace BuildingMapper
         }
 
         #endregion
-    } 
+    }
 }

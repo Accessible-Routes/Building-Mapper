@@ -206,6 +206,11 @@
             label1.Text = "Create a new building or open an existing building file";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // saveBuildingDialog
+            // 
+            saveBuildingDialog.DefaultExt = "bdlg";
+            saveBuildingDialog.Filter = "Building files|*.bdlg|All files|*.*";
+            // 
             // openImageDialog
             // 
             openImageDialog.FileName = "openFileDialog1";
