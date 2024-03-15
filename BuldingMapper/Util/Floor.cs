@@ -22,16 +22,16 @@ namespace BuildingMapper.Util
             Rooms = rooms;
         }
 
-        public static List<Floor> ConvertToFloorObjects(List<FloorEditor> floorEditors)
-        {
-            List<Floor> result = new List<Floor>();
+        //public static List<Floor> ConvertToFloorObjects(List<FloorEditor> floorEditors)
+        //{
+        //    List<Floor> result = new List<Floor>();
 
-            foreach (FloorEditor f in floorEditors)
-            {
-                result.Add(new Floor(f.FloorName, f.Rooms));
-            }
+        //    foreach (FloorEditor f in floorEditors)
+        //    {
+        //        result.Add(new Floor(f.FloorName, f.Rooms));
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
     }
 }

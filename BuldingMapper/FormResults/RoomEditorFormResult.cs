@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BuildingMapper.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,10 @@ namespace BuildingMapper.FormResults
 {
     public class RoomEditorFormResult : FormResult
     {
-
+        public RoomEditorFormResult() 
+        { 
+            Room = new Room();
+        }
+        public Room Room { get; set; }
     }
 }

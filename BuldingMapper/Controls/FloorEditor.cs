@@ -14,8 +14,6 @@ namespace BuildingMapper
 {
     public partial class FloorEditor : UserControl
     {
-        public List<Room> Rooms = new List<Room>();
-
         public string FloorName { get; set; }
 
         public FloorEditor(string floorName)
@@ -28,7 +26,7 @@ namespace BuildingMapper
         {
             roomListBox.Items.Clear();
 
-            foreach (Room room in Rooms)
+            foreach (Room room in Building.Instance.GetRooms(FloorName))
             {
                 roomListBox.Items.Add(room.Name);
             }
@@ -56,13 +54,12 @@ namespace BuildingMapper
 
         private void addButton_Click(object sender, EventArgs e)
         {
-            RoomChangeTracker newRCT = new RoomChangeTracker(Rooms);
-            RoomEditorForm newForm = new RoomEditorForm(newRCT);
+            RoomEditorForm newForm = new RoomEditorForm(FloorName);
             RoomEditorFormResult result = newForm.ShowAddRoomEditor();
 
             if (result.DialogResult == DialogResult.OK)
             {
-                Rooms = newRCT.CollectRooms();
+                Building.Instance.AddRoom(FloorName, result.Room);
             }
 
             UpdateRoomList();
@@ -82,7 +79,7 @@ namespace BuildingMapper
         {
             Room? selectedRoom = null;
 
-            foreach (Room r in Rooms)
+            foreach (Room r in Building.Instance.GetRooms(FloorName))
             {
                 if (roomListBox.SelectedItem.ToString() == r.Name)
                 {
@@ -97,13 +94,12 @@ namespace BuildingMapper
             }
 
             string oldname = selectedRoom.Name;
-            RoomChangeTracker newRCT = new RoomChangeTracker(Rooms);
-            RoomEditorForm newForm = new RoomEditorForm(newRCT);
+            RoomEditorForm newForm = new RoomEditorForm(FloorName);
             RoomEditorFormResult result = newForm.ShowEditRoomEditor(selectedRoom, oldname);
 
             if (result.DialogResult == DialogResult.OK)
             {
-                Rooms = newRCT.CollectRooms();
+                Building.Instance.EditRoom(FloorName, oldname, result.Room);
             }
 
             UpdateRoomList();
@@ -118,7 +114,7 @@ namespace BuildingMapper
         {
             Room? selectedRoom = null;
 
-            foreach (Room r in Rooms)
+            foreach (Room r in Building.Instance.GetRooms(FloorName))
             {
                 if (roomListBox.SelectedItem.ToString() == r.Name)
                 {
@@ -132,7 +128,7 @@ namespace BuildingMapper
                 throw new Exception("Selected room not found in list of rooms");
             }
 
-            Rooms.Remove(selectedRoom);
+            Building.Instance.RemoveRoom(FloorName, selectedRoom.Name);
 
             UpdateRoomList();
         }

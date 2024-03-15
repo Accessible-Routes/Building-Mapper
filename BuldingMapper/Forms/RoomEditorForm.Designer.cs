@@ -43,6 +43,8 @@
             roomTypeComboBox = new ComboBox();
             connectionsGroupBox = new GroupBox();
             connectionsTableLayoutPanel = new TableLayoutPanel();
+            floorTabControl = new TabControl();
+            tabPage1 = new TabPage();
             connectionsCheckedListBox = new CheckedListBox();
             mainTableLayoutPanel.SuspendLayout();
             tagsTableLayoutPanel.SuspendLayout();
@@ -52,6 +54,8 @@
             propertiesTableLayoutPanel.SuspendLayout();
             connectionsGroupBox.SuspendLayout();
             connectionsTableLayoutPanel.SuspendLayout();
+            floorTabControl.SuspendLayout();
+            tabPage1.SuspendLayout();
             SuspendLayout();
             // 
             // mainTableLayoutPanel
@@ -242,7 +246,7 @@
             // 
             connectionsTableLayoutPanel.ColumnCount = 1;
             connectionsTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            connectionsTableLayoutPanel.Controls.Add(connectionsCheckedListBox, 0, 0);
+            connectionsTableLayoutPanel.Controls.Add(floorTabControl, 0, 0);
             connectionsTableLayoutPanel.Dock = DockStyle.Fill;
             connectionsTableLayoutPanel.Location = new Point(3, 27);
             connectionsTableLayoutPanel.Name = "connectionsTableLayoutPanel";
@@ -252,15 +256,37 @@
             connectionsTableLayoutPanel.Size = new Size(466, 221);
             connectionsTableLayoutPanel.TabIndex = 0;
             // 
+            // floorTabControl
+            // 
+            floorTabControl.Controls.Add(tabPage1);
+            floorTabControl.Dock = DockStyle.Fill;
+            floorTabControl.Location = new Point(0, 0);
+            floorTabControl.Margin = new Padding(0);
+            floorTabControl.Name = "floorTabControl";
+            floorTabControl.SelectedIndex = 0;
+            floorTabControl.Size = new Size(466, 221);
+            floorTabControl.TabIndex = 0;
+            // 
+            // tabPage1
+            // 
+            tabPage1.Controls.Add(connectionsCheckedListBox);
+            tabPage1.Location = new Point(4, 34);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(458, 183);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "tabPage1";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
             // connectionsCheckedListBox
             // 
             connectionsCheckedListBox.Dock = DockStyle.Fill;
             connectionsCheckedListBox.FormattingEnabled = true;
             connectionsCheckedListBox.Location = new Point(3, 3);
+            connectionsCheckedListBox.Margin = new Padding(0);
             connectionsCheckedListBox.Name = "connectionsCheckedListBox";
-            connectionsCheckedListBox.Size = new Size(460, 215);
-            connectionsCheckedListBox.TabIndex = 1;
-            connectionsCheckedListBox.SelectedIndexChanged += connectionsCheckedListBox_SelectedIndexChanged;
+            connectionsCheckedListBox.Size = new Size(452, 177);
+            connectionsCheckedListBox.TabIndex = 3;
             // 
             // RoomEditorForm
             // 
@@ -282,6 +308,8 @@
             propertiesTableLayoutPanel.PerformLayout();
             connectionsGroupBox.ResumeLayout(false);
             connectionsTableLayoutPanel.ResumeLayout(false);
+            floorTabControl.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -302,6 +330,8 @@
         private CheckedListBox tagsListCheckbox;
         private GroupBox connectionsGroupBox;
         private TableLayoutPanel connectionsTableLayoutPanel;
+        private TabControl floorTabControl;
+        private TabPage tabPage1;
         private CheckedListBox connectionsCheckedListBox;
     }
 }

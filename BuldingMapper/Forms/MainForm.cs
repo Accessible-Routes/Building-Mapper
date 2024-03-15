@@ -10,10 +10,8 @@ namespace BuildingMapper
     public partial class MainForm : Form
     {
         string? buildingName = null;
-        List<FloorEditor> floors = new List<FloorEditor>();
 
         //State data
-        private bool buildingSaved = true;
         private string saveFile = string.Empty;
 
         public MainForm()
@@ -32,10 +30,10 @@ namespace BuildingMapper
             if (result.DialogResult == DialogResult.OK)
             {
                 //Make sure the user wanted to do this without saving
-                if (!buildingSaved)
+                if (!Building.Instance.BuildingSaved)
                 {
                     SaveWarningForm newSaveWarning = new SaveWarningForm();
-                    SaveWarningFormResult warningResult = newSaveWarning.ShowDialog(buildingName);
+                    SaveWarningFormResult warningResult = newSaveWarning.ShowDialog(Building.Instance.Name);
 
                     if (warningResult.DialogResult != DialogResult.OK)
                     {
@@ -46,7 +44,7 @@ namespace BuildingMapper
                 //Remove other tabs
                 floorTabControl.TabPages.Clear();
 
-                buildingSaved = false;
+                Building.Instance.BuildingSaved = false;
 
                 //Save building name and change window text
                 buildingName = result.BuildingName;
@@ -64,7 +62,7 @@ namespace BuildingMapper
                 floorEditor.Dock = DockStyle.Fill;
 
                 tabPage.Controls.Add(floorEditor);
-                floors.Add(floorEditor);
+                Building.Instance.AddFloor(result.FloorName);
 
                 floorEditor.UpdateImage(floorPlanImage);
 
@@ -84,14 +82,14 @@ namespace BuildingMapper
             if (result == DialogResult.OK)
             {
                 saveBuildingDialog.FileName = buildingName;
-                List<Floor> _data = Floor.ConvertToFloorObjects(floors);
+                List<Floor> _data = Building.Instance.GetFloors();
                 System.Diagnostics.Debug.WriteLine(_data.Count);
                 var options = new JsonSerializerOptions { WriteIndented = true };
                 string jsonString = JsonSerializer.Serialize(_data, options);
                 saveFile = saveBuildingDialog.FileName;
                 File.WriteAllText(saveFile, jsonString);
 
-                buildingSaved = true;
+                Building.Instance.BuildingSaved = true;
             }
         }
 
@@ -104,13 +102,13 @@ namespace BuildingMapper
             }
             else
             {
-                List<Floor> _data = Floor.ConvertToFloorObjects(floors);
+                List<Floor> _data = Building.Instance.GetFloors();
                 var options = new JsonSerializerOptions { WriteIndented = true };
                 string jsonString = JsonSerializer.Serialize(_data, options);
                 File.WriteAllText(saveFile, jsonString);
             }
 
-            buildingSaved = true;
+            Building.Instance.BuildingSaved = true;
         }
 
         #endregion

@@ -14,13 +14,13 @@ namespace BuildingMapper
 {
     public partial class RoomEditorForm : Form
     {
-        RoomChangeTracker roomChangeTracker;
+        private string floorName;
 
-        public RoomEditorForm(RoomChangeTracker roomChangeTracker)
+        public RoomEditorForm(string floorName)
         {
             InitializeComponent();
 
-            this.roomChangeTracker = roomChangeTracker;
+            this.floorName = floorName;
 
             List<string> types = new List<string>();
 
@@ -45,20 +45,6 @@ namespace BuildingMapper
 
         #region Event Functions
 
-        private void addButton_Click(object sender, EventArgs e)
-        {
-            RoomChangeTracker newRCT = new RoomChangeTracker(roomChangeTracker.CollectRooms());
-            RoomEditorForm newForm = new RoomEditorForm(newRCT);
-            RoomEditorFormResult result = newForm.ShowAddRoomEditor();
-
-            if (result.DialogResult == DialogResult.OK)
-            {
-                roomChangeTracker.MergeRoomTracker(newRCT);
-            }
-
-            UpdateRoomList(GetThisRoom());
-        }
-
         private void cancelButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
@@ -75,63 +61,6 @@ namespace BuildingMapper
 
         }
 
-        private void editButton_Click(object sender, EventArgs e)
-        {
-            List<Room> combinedRooms = roomChangeTracker.CollectRooms();
-
-            Room? selectedRoom = null;
-
-            foreach (Room r in combinedRooms)
-            {
-                if (connectionsCheckedListBox.SelectedItem.ToString() == r.Name)
-                {
-                    selectedRoom = r;
-                    break;
-                }
-            }
-
-            if (selectedRoom == null)
-            {
-                throw new Exception("Selected room not found in list of rooms");
-            }
-
-            string oldName = selectedRoom.Name;
-            RoomChangeTracker newRCT = new RoomChangeTracker(combinedRooms);
-            RoomEditorForm newForm = new RoomEditorForm(newRCT);
-            RoomEditorFormResult result = newForm.ShowEditRoomEditor(selectedRoom, oldName);
-
-            if (result.DialogResult == DialogResult.OK)
-            {
-                roomChangeTracker.MergeRoomTracker(newRCT);
-            }
-
-            UpdateRoomList(GetThisRoom());
-        }
-
-        private void removeButton_Click(object sender, EventArgs e)
-        {
-            List<Room> combinedRooms = roomChangeTracker.CollectRooms();
-
-            Room? selectedRoom = null;
-
-            foreach (Room r in combinedRooms)
-            {
-                if (connectionsCheckedListBox.SelectedItem.ToString() == r.Name)
-                {
-                    selectedRoom = r;
-                    break;
-                }
-            }
-
-            if (selectedRoom == null)
-            {
-                throw new Exception("Selected room not found in list of rooms");
-            }
-
-            roomChangeTracker.RemoveRoom(selectedRoom);
-
-            UpdateRoomList(GetThisRoom());
-        }
         private void roomNameTextBox_TextChanged(object sender, EventArgs e)
         {
             UpdateSaveButton();
@@ -144,17 +73,17 @@ namespace BuildingMapper
         }
 
 
-
-
         #endregion
 
         public RoomEditorFormResult ShowAddRoomEditor()
         {
             DialogResult dialogResult = ShowDialog();
 
-            roomChangeTracker.AddRoom(GetThisRoom());
-
-            RoomEditorFormResult result = new RoomEditorFormResult() { DialogResult = dialogResult };
+            RoomEditorFormResult result = new RoomEditorFormResult()
+            {
+                DialogResult = dialogResult,
+                Room = GetThisRoom()
+            };
 
             return result;
         }
@@ -166,15 +95,16 @@ namespace BuildingMapper
             roomTypeComboBox.SelectedItem = roomToEdit.Type.ToString();
 
 
-
             UpdateTagList(roomToEdit);
             UpdateRoomList(roomToEdit);
 
             DialogResult dialogResult = ShowDialog();
 
-            roomChangeTracker.EditRoom(GetThisRoom(), oldName);
-
-            RoomEditorFormResult result = new RoomEditorFormResult() { DialogResult = dialogResult };
+            RoomEditorFormResult result = new RoomEditorFormResult()
+            {
+                DialogResult = dialogResult,
+                Room = GetThisRoom()
+            };
 
             return result;
         }
@@ -187,7 +117,7 @@ namespace BuildingMapper
 
         private void UpdateRoomList(Room currentRoom)
         {
-            List<Room> combinedRooms = roomChangeTracker.CollectRooms();
+            List<Room> combinedRooms = Building.Instance.GetRooms(floorName);
 
             //We don't want to see the room we're working on in this list
             foreach (Room room in combinedRooms)
