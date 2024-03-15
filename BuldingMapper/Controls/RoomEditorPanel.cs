@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BuildingMapper
+namespace BuildingMapper.Controls
 {
     public class RoomEditorPanel : Panel
     {
@@ -54,7 +54,7 @@ namespace BuildingMapper
             set
             {
                 _image = value;
-                
+
                 ZoomToFit();
             }
         }

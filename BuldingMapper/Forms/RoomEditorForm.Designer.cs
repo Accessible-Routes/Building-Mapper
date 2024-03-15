@@ -43,10 +43,8 @@
             roomTypeComboBox = new ComboBox();
             connectionsGroupBox = new GroupBox();
             connectionsTableLayoutPanel = new TableLayoutPanel();
-            connectionsButtonsPanel = new Panel();
-            editButton = new Button();
-            removeButton = new Button();
-            addButton = new Button();
+            floorTabControl = new TabControl();
+            tabPage1 = new TabPage();
             connectionsCheckedListBox = new CheckedListBox();
             mainTableLayoutPanel.SuspendLayout();
             tagsTableLayoutPanel.SuspendLayout();
@@ -56,7 +54,8 @@
             propertiesTableLayoutPanel.SuspendLayout();
             connectionsGroupBox.SuspendLayout();
             connectionsTableLayoutPanel.SuspendLayout();
-            connectionsButtonsPanel.SuspendLayout();
+            floorTabControl.SuspendLayout();
+            tabPage1.SuspendLayout();
             SuspendLayout();
             // 
             // mainTableLayoutPanel
@@ -247,72 +246,47 @@
             // 
             connectionsTableLayoutPanel.ColumnCount = 1;
             connectionsTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            connectionsTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            connectionsTableLayoutPanel.Controls.Add(connectionsButtonsPanel, 0, 1);
-            connectionsTableLayoutPanel.Controls.Add(connectionsCheckedListBox, 0, 0);
+            connectionsTableLayoutPanel.Controls.Add(floorTabControl, 0, 0);
             connectionsTableLayoutPanel.Dock = DockStyle.Fill;
             connectionsTableLayoutPanel.Location = new Point(3, 27);
             connectionsTableLayoutPanel.Name = "connectionsTableLayoutPanel";
             connectionsTableLayoutPanel.RowCount = 2;
             connectionsTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            connectionsTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+            connectionsTableLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 0F));
             connectionsTableLayoutPanel.Size = new Size(466, 221);
             connectionsTableLayoutPanel.TabIndex = 0;
             // 
-            // connectionsButtonsPanel
+            // floorTabControl
             // 
-            connectionsButtonsPanel.Controls.Add(editButton);
-            connectionsButtonsPanel.Controls.Add(removeButton);
-            connectionsButtonsPanel.Controls.Add(addButton);
-            connectionsButtonsPanel.Dock = DockStyle.Fill;
-            connectionsButtonsPanel.Location = new Point(0, 171);
-            connectionsButtonsPanel.Margin = new Padding(0);
-            connectionsButtonsPanel.Name = "connectionsButtonsPanel";
-            connectionsButtonsPanel.Size = new Size(466, 50);
-            connectionsButtonsPanel.TabIndex = 0;
+            floorTabControl.Controls.Add(tabPage1);
+            floorTabControl.Dock = DockStyle.Fill;
+            floorTabControl.Location = new Point(0, 0);
+            floorTabControl.Margin = new Padding(0);
+            floorTabControl.Name = "floorTabControl";
+            floorTabControl.SelectedIndex = 0;
+            floorTabControl.Size = new Size(466, 221);
+            floorTabControl.TabIndex = 0;
             // 
-            // editButton
+            // tabPage1
             // 
-            editButton.Dock = DockStyle.Fill;
-            editButton.Enabled = false;
-            editButton.Location = new Point(112, 0);
-            editButton.Name = "editButton";
-            editButton.Size = new Size(242, 50);
-            editButton.TabIndex = 2;
-            editButton.Text = "Edit";
-            editButton.UseVisualStyleBackColor = true;
-            editButton.Click += editButton_Click;
-            // 
-            // removeButton
-            // 
-            removeButton.Dock = DockStyle.Right;
-            removeButton.Location = new Point(354, 0);
-            removeButton.Name = "removeButton";
-            removeButton.Size = new Size(112, 50);
-            removeButton.TabIndex = 1;
-            removeButton.Text = "Remove";
-            removeButton.UseVisualStyleBackColor = true;
-            // 
-            // addButton
-            // 
-            addButton.Dock = DockStyle.Left;
-            addButton.Location = new Point(0, 0);
-            addButton.Name = "addButton";
-            addButton.Size = new Size(112, 50);
-            addButton.TabIndex = 0;
-            addButton.Text = "Add";
-            addButton.UseVisualStyleBackColor = true;
-            addButton.Click += addButton_Click;
+            tabPage1.Controls.Add(connectionsCheckedListBox);
+            tabPage1.Location = new Point(4, 34);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(458, 183);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "tabPage1";
+            tabPage1.UseVisualStyleBackColor = true;
             // 
             // connectionsCheckedListBox
             // 
             connectionsCheckedListBox.Dock = DockStyle.Fill;
             connectionsCheckedListBox.FormattingEnabled = true;
             connectionsCheckedListBox.Location = new Point(3, 3);
+            connectionsCheckedListBox.Margin = new Padding(0);
             connectionsCheckedListBox.Name = "connectionsCheckedListBox";
-            connectionsCheckedListBox.Size = new Size(460, 165);
-            connectionsCheckedListBox.TabIndex = 1;
-            connectionsCheckedListBox.SelectedIndexChanged += connectionsCheckedListBox_SelectedIndexChanged;
+            connectionsCheckedListBox.Size = new Size(452, 177);
+            connectionsCheckedListBox.TabIndex = 3;
             // 
             // RoomEditorForm
             // 
@@ -334,7 +308,8 @@
             propertiesTableLayoutPanel.PerformLayout();
             connectionsGroupBox.ResumeLayout(false);
             connectionsTableLayoutPanel.ResumeLayout(false);
-            connectionsButtonsPanel.ResumeLayout(false);
+            floorTabControl.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -355,10 +330,8 @@
         private CheckedListBox tagsListCheckbox;
         private GroupBox connectionsGroupBox;
         private TableLayoutPanel connectionsTableLayoutPanel;
-        private Panel connectionsButtonsPanel;
-        private Button editButton;
-        private Button removeButton;
-        private Button addButton;
+        private TabControl floorTabControl;
+        private TabPage tabPage1;
         private CheckedListBox connectionsCheckedListBox;
     }
 }

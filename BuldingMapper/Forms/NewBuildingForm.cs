@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BuildingMapper.FormResults;
 
 namespace BuildingMapper
 {
@@ -75,6 +76,11 @@ namespace BuildingMapper
         private void buildingNameTextbox_TextChanged(object sender, EventArgs e)
         {
             UpdateSaveButton();
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

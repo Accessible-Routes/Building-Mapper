@@ -1,4 +1,6 @@
-﻿namespace BuildingMapper
+﻿using BuildingMapper.Controls;
+
+namespace BuildingMapper
 {
     partial class FloorEditor
     {
@@ -129,6 +131,7 @@
             RemoveButton.TabIndex = 1;
             RemoveButton.Text = "Remove";
             RemoveButton.UseVisualStyleBackColor = true;
+            RemoveButton.Click += RemoveButton_Click;
             // 
             // addButton
             // 
